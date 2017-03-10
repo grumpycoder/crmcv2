@@ -45,6 +45,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CRMC.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\CRMC.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMC.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\CRMC.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -152,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\VisitorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -159,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.module.js" />
+    <Content Include="app\visitors\visitor-list.component.html" />
     <Content Include="app\visitors\visitor-list.component.js" />
     <Content Include="css\site.css" />
     <Content Include="css\site.min.css" />
@@ -206,16 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CRMC.DataAccess\CRMC.DataAccess.csproj">
-      <Project>{CCF65580-4278-4A23-9BA2-BCF193CEF2A4}</Project>
-      <Name>CRMC.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CRMC.Domain\CRMC.Domain.csproj">
-      <Project>{7C3C91D5-8B09-45E9-9A13-1B7B7553AD1C}</Project>
-      <Name>CRMC.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Users.cshtml" />

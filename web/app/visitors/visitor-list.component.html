@@ -1,0 +1,64 @@
+﻿
+
+
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email Address</th>
+            <th>Zipcode</th>
+            <th>Donor</th>
+            <th>Priority</th>
+            <th>Entry</th>
+            <th>Match</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td><input type="text" ng-model="$ctrl.searchModel.firstname" class="form-control" placeholder="Firstname" /></td>
+            <td><input type="text" ng-model="$ctrl.searchModel.lastname" class="form-control" placeholder="Lastname" /></td>
+            <td><input type="text" ng-model="$ctrl.searchModel.emailAddress" class="form-control" placeholder="Email Address" /></td>
+            <td><input type="text" ng-model="$ctrl.searchModel.zipcode" class="form-control" placeholder="Zipcode" /></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="v in $ctrl.visitors">
+            <td>{{v.firstname}}</td>
+            <td>{{v.lastname}}</td>
+            <td>{{v.emailAddress}}</td>
+            <td>{{v.zipcode}}</td>
+            <td>{{v.isDonor}}</td>
+            <td>{{v.isPriority}}</td>
+            <td>
+                {{v.dateCreated | date:"MM/dd/yyyy" }}
+            </td>
+            <td>{{v.fuzzyMatchValue}}</td>
+            <td class="text-nowrap">
+                <a ng-click="$ctrl.edit(v)">Edit</a> |
+                <a ng-click="$ctrl.delete(v)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="9">
+                <span uib-pagination total-items="$ctrl.searchModel.filteredCount"
+                      ng-model="$ctrl.searchModel.page"
+                      max-size="5"
+                      items-per-page="$ctrl.searchModel.pageSize"
+                      class="pagination-sm"
+                      boundary-link-numbers="true"
+                      ng-change="$ctrl.paged()"
+                      rotate="false">
+                </span>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
