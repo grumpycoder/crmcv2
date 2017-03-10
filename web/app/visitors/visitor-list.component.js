@@ -46,6 +46,8 @@
         $ctrl.delete = function(v) {
             $http.delete('api/visitor/' + v.id).then(function(r) {
                 console.log('r', r);
+                var idx = $ctrl.visitors.indexOf(v);
+                $ctrl.visitors.splice(idx, 1);
             });
         }
     }
