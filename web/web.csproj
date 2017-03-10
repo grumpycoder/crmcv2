@@ -159,6 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CreateEditVisitorModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VisitorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -168,6 +169,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.module.js" />
+    <Content Include="app\visitors\visitor-edit.component.html" />
+    <Content Include="app\visitors\visitor-edit.component.js" />
     <Content Include="app\visitors\visitor-list.component.html" />
     <Content Include="app\visitors\visitor-list.component.js" />
     <Content Include="css\site.css" />

@@ -2,7 +2,7 @@
 (function () {
     var module = angular.module('app');
 
-    function controller($http) {
+    function controller($http, $modal) {
         var $ctrl = this; 
 
         $ctrl.$onInit = function() {
@@ -12,13 +12,33 @@
             }); 
         }
 
+        $ctrl.edit = function(v) {
+            $modal.open({
+                component: 'visitorEdit',
+                bindings: {
+                    modalInstance: "<"
+                },
+                resolve: {
+                    id: v.id
+                },
+                size: 'md'
+            }).result.then(function (result) {
+                angular.extend(v, result);
+            }, function (reason) {
+            });
+        }
 
+        $ctrl.delete = function(v) {
+            $http.delete('api/visitor/' + v.id).then(function(r) {
+                console.log('r', r);
+            });
+        }
     }
 
     module.component('visitorList',
         {
             templateUrl: 'app/visitors/visitor-list.component.html',
-            controller: ['$http', controller]
+            controller: ['$http', '$uibModal', controller]
         });
 }
 )();
