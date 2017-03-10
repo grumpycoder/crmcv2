@@ -1,24 +1,55 @@
 ﻿// VisitorController.cs
 
 using System;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web.Http;
 using CRMC.DataAccess;
 using CRMC.Domain;
+using web.Helpers;
+using web.Models;
 
 namespace web.Controllers
 {
     public class VisitorController : ApiController
     {
+        private readonly DataContext _context = DataContext.Create();
+        private const int PAGE_SIZE = 20;
 
-        public object Get()
+        public object Get([FromUri]VisitorSearchModel pager = null)
         {
-            using (var context = DataContext.Create())
-            {
-                var list = context.People.OrderBy(e => e.Lastname).Take(10).ToList();
-                return Ok(list);
-            }
+            if (pager == null) pager = new VisitorSearchModel();
+
+            var query = _context.People;
+            var totalCount = query.Count();
+
+            var pred = PredicateBuilder.True<Person>();
+            if (!string.IsNullOrWhiteSpace(pager.Firstname)) pred = pred.And(p => p.Firstname.Contains(pager.Firstname));
+            if (!string.IsNullOrWhiteSpace(pager.Lastname)) pred = pred.And(p => p.Lastname.Contains(pager.Lastname));
+            if (!string.IsNullOrWhiteSpace(pager.EmailAddress)) pred = pred.And(p => p.EmailAddress.Contains(pager.EmailAddress));
+            if (!string.IsNullOrWhiteSpace(pager.Zipcode)) pred = pred.And(p => p.Zipcode.Contains(pager.Zipcode));
+            pred = pred.And(p => p.IsDonor == pager.IsDonor);
+            pred = pred.And(p => p.IsPriority == pager.IsPriority);
+
+            var filteredQuery = query.Where(pred);
+            var pagerCount = filteredQuery.Count();
+
+            var results = filteredQuery
+                .OrderByDescending(e => e.DateCreated)
+                .Skip(pager.PageSize * (pager.Page - 1) ?? 0)
+                .Take(pager.PageSize ?? PAGE_SIZE)
+                .ToList();
+
+            var totalPages = Math.Ceiling((double)pagerCount / pager.PageSize ?? PAGE_SIZE);
+
+            pager.TotalCount = totalCount;
+            pager.FilteredCount = pagerCount;
+            pager.TotalPages = totalPages;
+            pager.Results = results;
+
+            return Ok(pager);
+
         }
 
         public object Get(int id)
@@ -34,7 +65,7 @@ namespace web.Controllers
 
         public object Post(CreateEditVisitorModel model)
         {
-            //SET DateCreated on saving context
+            //TODO: SET DateCreated on saving context
             using (var context = DataContext.Create())
             {
                 var visitor = context.People.Find(model.Id);

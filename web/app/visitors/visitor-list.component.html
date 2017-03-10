@@ -1,22 +1,22 @@
 ﻿
+<div st-table="$ctrl.model" st-pipe="$ctrl.search">
+    <span>
+        <button class="btn btn-primary" st-submit-search>
+            <i class="glyphicon glyphicon-search"></i> Search
+        </button>
 
-<span>
-    <button class="btn btn-primary" st-submit-search>
-        <i class="glyphicon glyphicon-search"></i> Search
-    </button>
+        <button class="btn btn-default" st-reset-search ng-model="$ctrl.searchModel">
+            <i class="glyphicon glyphicon-erase"></i> Clear
+        </button>
+    </span>
+    <span class="pull-right">
+        <button class="btn btn-default" ng-click="$ctrl.create()">
+            <i class="glyphicon glyphicon-plus"></i> New
+        </button>
+    </span>
 
-    <button class="btn btn-default" st-reset-search ng-model="$ctrl.searchModel">
-        <i class="glyphicon glyphicon-erase"></i> Clear
-    </button>
-</span>
-<span class="pull-right">
-    <button class="btn btn-default" ng-click="$ctrl.create()">
-        <i class="glyphicon glyphicon-plus"></i> New
-    </button>
-</span>
-
-<table class="table table-bordered table-responsive table-hover">
-    <thead>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
         <tr>
             <th>Firstname</th>
             <th>Lastname</th>
@@ -38,10 +38,10 @@
             <td></td>
             <td></td>
             <td></td>
-            
+
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         <tr ng-repeat="v in $ctrl.visitors">
             <td>{{v.firstname}}</td>
             <td>{{v.lastname}}</td>
@@ -58,8 +58,8 @@
                 <a ng-click="$ctrl.delete(v)">Delete</a>
             </td>
         </tr>
-    </tbody>
-    <tfoot>
+        </tbody>
+        <tfoot>
         <tr>
             <td colspan="9">
                 <span uib-pagination total-items="$ctrl.searchModel.filteredCount"
@@ -73,6 +73,6 @@
                 </span>
             </td>
         </tr>
-    </tfoot>
-</table>
-
+        </tfoot>
+    </table>
+</div>

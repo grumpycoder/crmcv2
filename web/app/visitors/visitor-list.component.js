@@ -4,12 +4,16 @@
 
     function controller($http, $modal) {
         var $ctrl = this; 
+        var pageSizeDefault = 10;
+        var tableStateRef;
+
+        $ctrl.searchModel = {
+            page: 1,
+            pageSize: pageSizeDefault
+        };
 
         $ctrl.$onInit = function() {
             console.log('init visitor list');
-            $http.get('api/visitor').then(function(r) {
-                $ctrl.visitors = r.data;
-            }); 
         }
 
         $ctrl.create = function () {
@@ -45,11 +49,24 @@
 
         $ctrl.delete = function(v) {
             $http.delete('api/visitor/' + v.id).then(function(r) {
-                console.log('r', r);
                 var idx = $ctrl.visitors.indexOf(v);
                 $ctrl.visitors.splice(idx, 1);
             });
         }
+
+        $ctrl.search = function (tableState) {
+            tableStateRef = tableState;
+            $http.get('api/visitor', { params: $ctrl.searchModel }).then(function (r) {
+                $ctrl.visitors = r.data.results;
+                $ctrl.searchModel = r.data;
+                delete $ctrl.searchModel.results;
+            });
+        }
+
+        $ctrl.paged = function () {
+            $ctrl.search(tableStateRef);
+        }
+
     }
 
     module.component('visitorList',
