@@ -1,0 +1,26 @@
+﻿<form name="productForm" novalidate>
+
+    <div class="modal-body">
+        <fieldset>
+            
+            <div class="form-group">
+                <label class="control-label">Word</label>
+                <input type="text" class="form-control" ng-model="$ctrl.censor.word" autofocus />
+            </div>
+            
+        </fieldset>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <button class="btn btn-default" ng-click="$ctrl.cancel()">
+            Cancel
+        </button>
+        <button class="btn btn-primary" ng-click="$ctrl.save()">
+            Save
+        </button>
+    </div>
+</form>
+
+

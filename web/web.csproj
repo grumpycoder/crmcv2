@@ -159,6 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CensorController.cs" />
     <Compile Include="Controllers\CreateEditVisitorModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VisitorController.cs" />
@@ -166,12 +167,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PredicateBuilder.cs" />
+    <Compile Include="Models\CensorSearchModel.cs" />
     <Compile Include="Models\PagerModel.cs" />
     <Compile Include="Models\VisitorSearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.module.js" />
+    <Content Include="app\censors\censor-edit.component.js" />
+    <Content Include="app\censors\censor-list.component.html" />
+    <Content Include="app\censors\censor-list.component.js" />
+    <Content Include="app\censors\censor-edit.component.html" />
     <Content Include="app\directives\directives.modules.js" />
     <Content Include="app\directives\stTable.directive.js" />
     <Content Include="app\visitors\visitor-edit.component.html" />
