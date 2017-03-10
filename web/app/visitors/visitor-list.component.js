@@ -12,6 +12,21 @@
             }); 
         }
 
+        $ctrl.create = function () {
+            $modal.open({
+                component: 'visitorEdit',
+                bindings: {
+                    modalInstance: "<"
+                },
+                resolve: {
+                },
+                size: 'md'
+            }).result.then(function (result) {
+                $ctrl.visitors.unshift(result);
+            }, function (reason) {
+            });
+        }
+
         $ctrl.edit = function(v) {
             $modal.open({
                 component: 'visitorEdit',

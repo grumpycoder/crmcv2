@@ -1,9 +1,11 @@
 ﻿// VisitorController.cs
 
+using System;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web.Http;
 using CRMC.DataAccess;
+using CRMC.Domain;
 
 namespace web.Controllers
 {
@@ -32,6 +34,7 @@ namespace web.Controllers
 
         public object Post(CreateEditVisitorModel model)
         {
+            //SET DateCreated on saving context
             using (var context = DataContext.Create())
             {
                 var visitor = context.People.Find(model.Id);
@@ -45,11 +48,26 @@ namespace web.Controllers
                     visitor.IsPriority = model.IsPriority;
                     visitor.FuzzyMatchValue = model.FuzzyMatchValue;
 
-                    context.People.AddOrUpdate(visitor);
                 }
+                else
+                {
+                    visitor = new Person()
+                    {
+                        Firstname = model.Firstname,
+                        Lastname = model.Lastname,
+                        EmailAddress = model.EmailAddress,
+                        Zipcode = model.Zipcode,
+                        IsDonor = model.IsDonor,
+                        IsPriority = model.IsPriority,
+                        FuzzyMatchValue = model.FuzzyMatchValue,
+                        SortOrder = Guid.NewGuid()
+                    };
+
+                }
+                context.People.AddOrUpdate(visitor);
                 context.SaveChanges();
 
-                return Ok(model);
+                return Ok(visitor);
             }
         }
 

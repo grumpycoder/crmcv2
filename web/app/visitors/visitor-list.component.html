@@ -1,5 +1,19 @@
 ﻿
 
+<span>
+    <button class="btn btn-primary" st-submit-search>
+        <i class="glyphicon glyphicon-search"></i> Search
+    </button>
+
+    <button class="btn btn-default" st-reset-search ng-model="$ctrl.searchModel">
+        <i class="glyphicon glyphicon-erase"></i> Clear
+    </button>
+</span>
+<span class="pull-right">
+    <button class="btn btn-default" ng-click="$ctrl.create()">
+        <i class="glyphicon glyphicon-plus"></i> New
+    </button>
+</span>
 
 <table class="table table-bordered table-responsive table-hover">
     <thead>
