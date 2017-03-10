@@ -158,6 +158,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\app.module.js" />
+    <Content Include="app\visitors\visitor-list.component.js" />
     <Content Include="css\site.css" />
     <Content Include="css\site.min.css" />
     <Content Include="css\vendor.min.css" />
@@ -165,6 +167,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
+    <Content Include="js\app.min.js" />
     <Content Include="js\vendor.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
