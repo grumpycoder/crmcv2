@@ -1,4 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using CRMC.DataAccess;
+using CRMC.Domain;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace web.Controllers
 {
@@ -30,6 +35,13 @@ namespace web.Controllers
 
         public ActionResult Users()
         {
+            var manager = new UserManager<ApplicationUser>(
+       new UserStore<ApplicationUser>(
+           DataContext.Create()));
+
+            var list =
+              manager.Users.ToList();
+
             return View();
         }
     }

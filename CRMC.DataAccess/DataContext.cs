@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CRMC.DataAccess
 {
-    public class DataContext : IdentityDbContext
+    public class DataContext : IdentityDbContext<ApplicationUser>
     {
         public DataContext() : base("DefaultConnection")
         {
@@ -34,12 +34,6 @@ namespace CRMC.DataAccess
 
             builder.Properties<string>().Configure(c => c.HasColumnType("varchar"));
             builder.Properties<DateTime>().Configure(c => c.HasColumnType("smalldatetime"));
-
-            builder.Entity<ApplicationUser>().ToTable("Users", "Security");
-            builder.Entity<IdentityUserRole>().ToTable("UserRoles", "Security");
-            builder.Entity<IdentityUserClaim>().ToTable("UserClaims", "Security");
-            builder.Entity<IdentityUserLogin>().ToTable("UserLogins", "Security");
-            builder.Entity<IdentityRole>().ToTable("Roles", "Security");
 
             builder.Entity<Person>().ToTable("Persons");
             builder.Entity<Configuration>().ToTable("Configuration");

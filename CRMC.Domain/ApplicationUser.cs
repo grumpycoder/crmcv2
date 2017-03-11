@@ -19,8 +19,8 @@ namespace CRMC.Domain
             return userIdentity;
         }
 
-        public string FullName { get; set; }
-        public byte[] UserPhoto { get; set; }
-        public string UserPhotoType { get; set; }
+        //public string FullName { get; set; }
+        //public byte[] UserPhoto { get; set; }
+        //public string UserPhotoType { get; set; }
     }
 }
