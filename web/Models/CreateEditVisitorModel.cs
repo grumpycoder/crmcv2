@@ -1,4 +1,4 @@
-namespace web.Controllers
+namespace web.Models
 {
     public class CreateEditVisitorModel
     {

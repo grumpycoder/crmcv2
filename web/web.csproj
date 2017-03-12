@@ -192,8 +192,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CensorController.cs" />
-    <Compile Include="Controllers\CreateEditVisitorModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VisitorController.cs" />
@@ -202,6 +202,8 @@
     </Compile>
     <Compile Include="Helpers\PredicateBuilder.cs" />
     <Compile Include="Models\CensorSearchModel.cs" />
+    <Compile Include="Models\CreateEditVisitorModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagerModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\VisitorSearchModel.cs" />
@@ -275,6 +277,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Configuration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Auth\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

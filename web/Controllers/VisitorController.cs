@@ -29,8 +29,8 @@ namespace web.Controllers
             if (!string.IsNullOrWhiteSpace(pager.Lastname)) pred = pred.And(p => p.Lastname.Contains(pager.Lastname));
             if (!string.IsNullOrWhiteSpace(pager.EmailAddress)) pred = pred.And(p => p.EmailAddress.Contains(pager.EmailAddress));
             if (!string.IsNullOrWhiteSpace(pager.Zipcode)) pred = pred.And(p => p.Zipcode.Contains(pager.Zipcode));
-            pred = pred.And(p => p.IsDonor == pager.IsDonor);
-            pred = pred.And(p => p.IsPriority == pager.IsPriority);
+            //pred = pred.And(p => p.IsDonor == pager.IsDonor);
+            //pred = pred.And(p => p.IsPriority == pager.IsPriority);
 
             var filteredQuery = query.Where(pred);
             var pagerCount = filteredQuery.Count();

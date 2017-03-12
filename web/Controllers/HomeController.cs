@@ -13,7 +13,7 @@ namespace web.Controllers
         {
             return View();
         }
-
+        [Authorize]
         public ActionResult Visitors()
         {
             ViewBag.Message = "Your application description page.";
@@ -35,13 +35,6 @@ namespace web.Controllers
 
         public ActionResult Users()
         {
-            var manager = new UserManager<ApplicationUser>(
-       new UserStore<ApplicationUser>(
-           DataContext.Create()));
-
-            var list =
-              manager.Users.ToList();
-
             return View();
         }
     }
