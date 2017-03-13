@@ -211,7 +211,7 @@ namespace wot
         private async Task InitConnectionManager()
         {
             var connection = new HubConnection($"{WebServerUrl}signalr");
-            Hub = connection.CreateHubProxy("wot");
+            Hub = connection.CreateHubProxy("NameNotificationHub");
 
             connection.Start().ContinueWith(task =>
             {
