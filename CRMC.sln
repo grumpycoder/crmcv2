@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMC.Domain", "CRMC.Domain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMC.DataAccess", "CRMC.DataAccess\CRMC.DataAccess.csproj", "{CCF65580-4278-4A23-9BA2-BCF193CEF2A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wot", "wot\wot.csproj", "{C481BFF4-87C4-4C29-8E73-2FEB46A3F59E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CCF65580-4278-4A23-9BA2-BCF193CEF2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCF65580-4278-4A23-9BA2-BCF193CEF2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCF65580-4278-4A23-9BA2-BCF193CEF2A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C481BFF4-87C4-4C29-8E73-2FEB46A3F59E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C481BFF4-87C4-4C29-8E73-2FEB46A3F59E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C481BFF4-87C4-4C29-8E73-2FEB46A3F59E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C481BFF4-87C4-4C29-8E73-2FEB46A3F59E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

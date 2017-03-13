@@ -56,12 +56,11 @@
     <Compile Include="AppConfig.cs" />
     <Compile Include="Censor.cs" />
     <Compile Include="ApplicationUser.cs" />
-    <Compile Include="Configuration.cs" />
     <Compile Include="ConfigurationColor.cs" />
     <Compile Include="ConfigurationMode.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WallConfiguration.cs" />
+    <Compile Include="Configuration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

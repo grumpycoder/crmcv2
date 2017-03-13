@@ -1,36 +1,24 @@
-﻿using System.Collections.Generic;
-
-namespace CRMC.Domain
+﻿namespace CRMC.Domain
 {
     public class Configuration
     {
-        public Configuration()
-        {
-            ConfigurationColors = new HashSet<ConfigurationColor>();
-        }
         public int Id { get; set; }
-        public string HubName { get; set; }
-        public string Webserver { get; set; }
+        public int MinFontSize { get; set; }
+        public int MaxFontSize { get; set; }
+        public int KioskEntryTopMargin { get; set; }
+        public int ScreenBottomMargin { get; set; }
+        public double GeneralRotationDelay { get; set; }
+        public double PriorityRotationDelay { get; set; }
+        public int KioskDisplayRecycleCount { get; set; }
         public double Volume { get; set; }
-        public string FontFamily { get; set; }
-        public int? DefaultMinFontSize { get; set; }
-        public int? DefaultMaxFontSize { get; set; }
-        public int? DefaultPriorityMinFontSize { get; set; }
-        public int? DefaultPriorityMaxFontSize { get; set; }
-        public double DefaultItemDelay { get; set; }
-        public double DefaultSpeedModifier { get; set; }
-        public double DefaultPriorityItemDelay { get; set; }
-        public double DefaultLocalItemDelay { get; set; }
-        public string DefaultAudioFilePath { get; set; }
-        public double NewItemOnScreenDelay { get; set; }
-        public double NewItemOnScreenGrowTime { get; set; }
-        public double NewItemOnScreenShrinkTime { get; set; }
-        public double NewItemFallAnimationDelay { get; set; }
-        public double NewItemFallAnimationDelayOffset { get; set; }
-        public double NewItemTopMargin { get; set; }
-        public double TopMarginOffset { get; set; }
 
-        public virtual ICollection<ConfigurationColor> ConfigurationColors { get; set; }
-        public double? KioskRotationDelay { get; set; }
+        public double GrowAnimationDuration { get; set; }
+        public double ShrinkAnimationDuration { get; set; }
+        public double FallAnimationDurationTimeModifier { get; set; }
+
+        //TODO: Remove Mode
+        public virtual ConfigurationMode ConfigurationMode { get; set; }
+
+        public bool Active { get; set; }
     }
 }

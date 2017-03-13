@@ -24,8 +24,7 @@ namespace CRMC.DataAccess
 
         public DbSet<Person> People { get; set; }
         public DbSet<Censor> Censors { get; set; }
-        public DbSet<AppConfig> AppSettings { get; set; }
-        public virtual DbSet<Configuration> Configurations { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
         public virtual DbSet<ConfigurationColor> ConfigurationColors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder builder)
@@ -38,6 +37,7 @@ namespace CRMC.DataAccess
             builder.Entity<Person>().ToTable("Persons");
             builder.Entity<Configuration>().ToTable("Configuration");
             builder.Entity<ConfigurationColor>().ToTable("ConfigurationColors");
+            builder.Entity<Configuration>().ToTable("Configuration");
         }
     }
 }
