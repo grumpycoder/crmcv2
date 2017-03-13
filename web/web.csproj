@@ -194,6 +194,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CensorController.cs" />
+    <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VisitorController.cs" />
@@ -216,6 +217,8 @@
     <Content Include="app\censors\censor-list.component.html" />
     <Content Include="app\censors\censor-list.component.js" />
     <Content Include="app\censors\censor-edit.component.html" />
+    <Content Include="app\configuration\configuration-setting.component.html" />
+    <Content Include="app\configuration\configuration-setting.component.js" />
     <Content Include="app\directives\directives.modules.js" />
     <Content Include="app\directives\stTable.directive.js" />
     <Content Include="app\users\user-edit.component.html" />

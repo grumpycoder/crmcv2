@@ -1,0 +1,67 @@
+﻿
+
+<form name="productForm" novalidate>
+    <fieldset>
+
+        <div class="form-group">
+            <label class="control-label">Hubname</label>
+            <input type="text" class="form-control" ng-model="$ctrl.configuration.hubName" autofocus />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Webserver</label>
+            <input type="text" class="form-control" ng-model="$ctrl.configuration.webServerURL" autofocus />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Audio Path</label>
+            <input type="text" class="form-control" ng-model="$ctrl.configuration.audioFilePath" autofocus />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Volume</label>
+            <input type="text" class="form-control" ng-model="$ctrl.configuration.volume" autofocus />
+            <label class="control-label">{{ $ctrl.configuration.volume *100 }}</label>
+            <slider floor="0" ceiling="1" step="0.1" precision="2" ng-model="$ctrl.configuration.volume"></slider>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Scroll Speed</label>
+            <input type="text" class="form-control" ng-model="$ctrl.configuration.scrollSpeed" autofocus />
+            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.scrollSpeed"></slider>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Min Font Size</label>
+            <input type="text" class="form-control" ng-model="$ctrl.configuration.minFontSize" autofocus />
+            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.scrollSpeed"></slider>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Max Font Size</label>
+            <input type="text" class="form-control" ng-model="$ctrl.configuration.maxFontSize" autofocus />
+            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.scrollSpeed"></slider>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Min Font Size Priority</label>
+            <input type="text" class="form-control" ng-model="$ctrl.configuration.minFontSizeVIP" autofocus />
+            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.scrollSpeed"></slider>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Max Font Size Priority</label>
+            <input type="text" class="form-control" ng-model="$ctrl.configuration.maxFontSizeVIP" autofocus />
+            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.scrollSpeed"></slider>
+        </div>
+    </fieldset>
+
+    <div class="modal-footer">
+
+        <button class="btn btn-default" ng-click="$ctrl.cancel()">
+            Cancel
+        </button>
+        <button class="btn btn-primary" ng-click="$ctrl.save()">
+            Save
+        </button>
+    </div>
+</form>
+
+

@@ -22,7 +22,8 @@
     "angular-bootstrap": "2.2.0",
     "angular-sanitize": "1.6.2",
     "lodash": "3.10.1",
-    "bootswatch-dist": "3.3.0-united"
+    "bootswatch-dist": "3.3.0-united",
+    "angular-slider": "^0.3.2"
   },
   "overrides": {
     "bootswatch-dist": {
@@ -34,6 +35,12 @@
         "fonts/glyphicons-halflings-regular.ttf",
         "fonts/glyphicons-halflings-regular.woff",
         "fonts/glyphicons-halflings-regular.woff2"
+      ]
+    },
+    "angular-slider": {
+      "main": [
+        "dist/slider.js",
+        "dist/slider.css"
       ]
     }
   }
