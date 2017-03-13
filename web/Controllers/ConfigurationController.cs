@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using CRMC.DataAccess;
 using CRMC.Domain;
+using web.Hubs;
 
 namespace web.Controllers
 {

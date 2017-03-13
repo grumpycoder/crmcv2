@@ -38,8 +38,6 @@ namespace wot.ViewModels
             Console.WriteLine($"Loading new names {currentCount}");
             var service = new NameService(webServerUrl);
             People = await service.GetDistinct(currentCount, defaultTakeCount, false);
-            var person = People.FirstOrDefault();
-            Debug.WriteLine(person.Lastname);
         }
 
         public async Task<List<PersonViewModel>> UpdateQueueAsync(int currentCount, int defaultTakeCount, string webServerUrl)

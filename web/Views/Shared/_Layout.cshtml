@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - CRMC Administration</title>
     <link href="~/css/vendor.min.css" rel="stylesheet" />
     <link href="~/css/site.min.css" rel="stylesheet" />
+    
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -26,7 +27,7 @@
                     <li>@Html.ActionLink("Users", "Users", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
-                
+
             </div>
 
         </div>
@@ -41,6 +42,9 @@
 
     <script src="~/js/vendor.min.js"></script>
     <script src="~/js/app.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

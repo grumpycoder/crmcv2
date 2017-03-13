@@ -175,7 +175,6 @@ namespace wot
                 Canvas.SetTop(displayElement.Border, yPosition);
                 _canvas.Children.Add(displayElement.Border);
                 _canvas.UpdateLayout();
-                Debug.WriteLine($"Displaying {displayElement.Person}");
                 storyboard.Begin(this);
             });
             person.NextDisplayTime = DateTime.Now.AddSeconds(totalTime);
