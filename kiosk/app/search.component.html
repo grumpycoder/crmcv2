@@ -1,0 +1,42 @@
+﻿<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="margin-top: 250px;">
+        <p>To find your name, type either your full name or just your last name. Then touch "CONTINUE".</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="margin-top: 40px;">
+        <!--<form name="vm.searchForm" novalidate="" id="searchForm" role="form" style="width: 658px; margin: 30px auto 0 auto;">-->
+        <form name="vm.searchForm" novalidate="" id="searchForm" role="form">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <input type="text" class="form-control" id="inputSearchText" name="inputSearchText"
+                           ng-model="$ctrl.searchTerm"
+                           ng-focus="vm.setFocus(vm.searchForm.inputSearchText)"
+                           placeholder="Search"
+                           ng-pattern="/^[a-zA-Z ]+$/"
+                           required>
+                    <div ng-messages="vm.searchForm.inputSearchText.$error" ng-show="vm.showValidationErrors">
+                        <span class="errorMessage arrow_box" ng-message="required" class="text-danger">Required</span>
+                        <span class="errorMessage arrow_box" ng-message="pattern" class="text-danger">Invalid characters</span>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="margin-top: 50px;">
+        <button class="btn btn-danger btn-lg btn-custom pull-left" ng-click="$ctrl.gotoWelcome()">
+            <i class="fa fa-angle-left"></i>
+            GO BACK
+        </button>
+        <button class="btn btn-danger btn-lg btn-custom pull-right"
+                ng-click="$ctrl.gotoSearchResults()">
+            CONTINUE <i class="fa fa-angle-right"></i>
+        </button>
+    </div>
+</div>

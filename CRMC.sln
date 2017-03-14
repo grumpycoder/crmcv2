@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wot", "wot\wot.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "TestHarness\TestHarness.csproj", "{99D9B93D-AC63-4F80-BA06-38B100D25D20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kiosk", "kiosk\kiosk.csproj", "{1A89BF93-3CF5-41A1-8519-B4FEBDB202BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{99D9B93D-AC63-4F80-BA06-38B100D25D20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99D9B93D-AC63-4F80-BA06-38B100D25D20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99D9B93D-AC63-4F80-BA06-38B100D25D20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A89BF93-3CF5-41A1-8519-B4FEBDB202BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A89BF93-3CF5-41A1-8519-B4FEBDB202BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A89BF93-3CF5-41A1-8519-B4FEBDB202BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A89BF93-3CF5-41A1-8519-B4FEBDB202BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
