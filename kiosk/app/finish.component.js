@@ -1,10 +1,11 @@
 ﻿//finish.component.js
 (function () {
     var module = angular.module('app');
-
+    //TODO: SET/GET kiosk number from local storage
+    //TODO: GET hub url from settings
     function controller(visitor, $timeout) {
         var $ctrl = this;
-        
+
         $ctrl.countDownWatch = function () {
             if ($ctrl.countDown_tick <= 0) {
                 visitor.clear();
@@ -16,7 +17,14 @@
         };
 
         $ctrl.$onInit = function () {
-            console.log('finish init');
+            console.log('finish init', visitor.get());
+            $.connection.hub.url = 'http://localhost:49960/signalr';
+            var hub = $.connection.nameNotificationHub;
+            $.connection.hub.start().done(function() {
+                console.log('hub connection started');
+                hub.server.addName(1, visitor.get());
+            });
+
             $ctrl.countDown_tick = 3;
             $ctrl.countDownWatch();
         }

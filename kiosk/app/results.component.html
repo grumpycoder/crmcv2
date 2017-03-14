@@ -11,23 +11,24 @@
         <div class="grid">
             <div class="table-container">
                 <table class="ng-table-rowselected">
-                    <tr ng-repeat="person in $ctrl.visitors" ng-click="person.$selected = !person.$selected; $ctrl.toggleName(person)" ng-multiple="false" ng-class="{'selected': person.$selected}">
-                        <td style="text-align: left;">{{person.firstname}} {{person.lastname}}</td>
-                        <td style="text-align: right">{{person.zipcode}}</td>
+                    <tr ng-repeat="visitor in $ctrl.visitors" ng-click="visitor.$selected = !visitor.$selected; $ctrl.toggleName(visitor)" ng-multiple="false" ng-class="{'selected': visitor.$selected}">
+                        <td style="text-align: left;">{{visitor.firstname}} {{visitor.lastname}}</td>
+                        <td style="text-align: right">{{visitor.zipcode}}</td>
                     </tr>
                 </table>
             </div>
 
         </div>
         <div class="text-center">
-            <pagination ng-model="$ctrl.paging.currentPage"
-                        ng-change="$ctrl.pageChanged(page)"
-                        total-items="4"
-                        max-size="3"
-                        page="$ctrl.paging.currentPage"
-                        class="pagination-sm custom"
-                        items-per-page="2">
-            </pagination>
+            <span uib-pagination total-items="$ctrl.searchModel.filteredCount"
+                  ng-model="$ctrl.searchModel.page"
+                  max-size="5"
+                  items-per-page="$ctrl.searchModel.pageSize"
+                  class="pagination-sm"
+                  boundary-link-numbers="true"
+                  ng-change="$ctrl.paged()"
+                  rotate="false">
+            </span>
         </div>
     </div>
     <div class="row">

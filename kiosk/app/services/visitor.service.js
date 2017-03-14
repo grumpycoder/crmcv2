@@ -1,6 +1,7 @@
 ﻿//visitor.service.js
 (function () {
     var module = angular.module('app');
+    //TODO: Implement search
 
     function factory() {
         var visitor = {};
@@ -8,6 +9,7 @@
 
         return {
             clear: clear,
+            clearTerm: clearTerm, 
             get: get,
             getTerm: getTerm,
             set: set,
@@ -17,6 +19,10 @@
 
         function clear() {
             visitor = {};
+        }
+
+        function clearTerm() {
+            term = ''; 
         }
 
         function get() {

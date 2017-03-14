@@ -7,16 +7,15 @@
 
         $ctrl.$onInit = function () {
             console.log('search init');
+            $ctrl.searchTerm = visitor.getTerm();
         }
 
         $ctrl.gotoWelcome = function () {
-            console.log('goto welcome');
             visitor.clear();
             this.$router.navigate(['Welcome']);
         }
 
         $ctrl.gotoSearchResults = function() {
-            console.log('search results');
             visitor.setTerm($ctrl.searchTerm); 
             this.$router.navigate(['Results']);
         }
