@@ -16,7 +16,8 @@
         }
 
         $ctrl.gotoPledge = function () {
-            this.$router.navigate(['Pledge']);
+            console.log($ctrl.form);
+            //this.$router.navigate(['Pledge']);
         }
     }
 

@@ -1,70 +1,76 @@
-﻿
-<div class="row">
-    <div class="col-md-12" style="margin-top: 225px;">
-        <p class="text-center">To select your name, touch it in the list below. Then touch "CONTINUE".</p>
+﻿<div class="container" style="margin-top: 225px;">
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center">To select your name, touch it in the list below. Then touch "CONTINUE".</p>
+        </div>
     </div>
-</div>
 
-<div class="row">
+    <div class="row">
 
-    <div class="col-md-12">
-        <div class="grid">
-            <div class="table-container">
-                <table class="ng-table-rowselected">
-                    <tr ng-repeat="visitor in $ctrl.visitors" ng-click="visitor.$selected = !visitor.$selected; $ctrl.toggleName(visitor)" ng-multiple="false" ng-class="{'selected': visitor.$selected}">
+        <div class="col-md-8 col-lg-offset-2">
+
+            
+            <table class="table table-condensed ng-table-rowselected">
+                <tbody>
+                    <tr ng-repeat="visitor in $ctrl.visitors" ng-click="$ctrl.toggleName(visitor)" ng-multiple="false" ng-class="{'selected': $ctrl.visitor === visitor }">
                         <td style="text-align: left;">{{visitor.firstname}} {{visitor.lastname}}</td>
                         <td style="text-align: right">{{visitor.zipcode}}</td>
                     </tr>
-                </table>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <div class="text-center">
+                            <span uib-pagination class="pagination-sm custom" total-items="$ctrl.searchModel.filteredCount"
+                                  ng-model="$ctrl.searchModel.page"
+                                  max-size="5"
+                                  items-per-page="$ctrl.searchModel.pageSize"
+                                  boundary-link-numbers="true"
+                                  ng-change="$ctrl.paged()"
+                                  rotate="false">
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <p class="text-center">
+                    If you are unable to find your name, you can return to the home screen to take the pledge and add
+                    your name to the list.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="btn-row" style="margin-top: 50px;">
+
+            <div class="pull-left">
+                <button class="btn btn-danger btn-lg btn-custom" ng-click="$ctrl.gotoSearch()">
+                    <i class="fa fa-angle-left"></i> GO BACK
+                </button>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-danger btn-lg btn-custom"
+                        ng-click="$ctrl.pledge()" ng-disabled="!$ctrl.visitor">
+                    CONTINUE <i class="fa fa-angle-right"></i>
+                </button>
             </div>
 
+            <div class="text-center">
+                <button class="btn btn-danger btn-lg"
+                        ng-click="$ctrl.gotoWelcome()">
+                    HOME
+                </button>
+            </div>
+            <!--</div>-->
         </div>
-        <div class="text-center">
-            <span uib-pagination total-items="$ctrl.searchModel.filteredCount"
-                  ng-model="$ctrl.searchModel.page"
-                  max-size="5"
-                  items-per-page="$ctrl.searchModel.pageSize"
-                  class="pagination-sm"
-                  boundary-link-numbers="true"
-                  ng-change="$ctrl.paged()"
-                  rotate="false">
-            </span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <p class="text-center">
-                If you are unable to find your name, you can return to the home screen to take the pledge and add
-                your name to the list.
-            </p>
-        </div>
-    </div>
-
-</div>
-
-
-<div class="row">
-    <div class="btn-row" style="margin-top: 50px;">
-
-        <div class="pull-left">
-            <button class="btn btn-danger btn-lg btn-custom" ng-click="$ctrl.gotoSearch()">
-                <i class="fa fa-angle-left"></i> GO BACK
-            </button>
-        </div>
-        <div class="pull-right">
-            <button class="btn btn-danger btn-lg btn-custom"
-                    ng-click="$ctrl.pledge()"
-                    >
-                CONTINUE <i class="fa fa-angle-right"></i>
-            </button>
-        </div>
-
-        <div class="text-center">
-            <button class="btn btn-danger btn-lg"
-                    ng-click="$ctrl.gotoWelcome()">
-                HOME
-            </button>
-        </div>
-        <!--</div>-->
     </div>
 </div>

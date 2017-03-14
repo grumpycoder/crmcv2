@@ -1,6 +1,6 @@
 ﻿//app.module.js
 (function () {
-    var module = angular.module('app', ['ngComponentRouter', 'ui.bootstrap']);
+    var module = angular.module('app', ['ngComponentRouter', 'ui.bootstrap', 'ngMessages']);
 
     module.component('kiosk',
         {

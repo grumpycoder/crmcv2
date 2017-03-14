@@ -1,42 +1,41 @@
-﻿<div class="row">
-    <div class="col-md-8 col-md-offset-2" style="margin-top: 250px;">
-        <p>To find your name, type either your full name or just your last name. Then touch "CONTINUE".</p>
+﻿<div class="container" style="margin-top: 250px;">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <p>To find your name, type either your full name or just your last name. Then touch "CONTINUE".</p>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-8 col-md-offset-2" style="margin-top: 40px;">
-        <!--<form name="vm.searchForm" novalidate="" id="searchForm" role="form" style="width: 658px; margin: 30px auto 0 auto;">-->
-        <form name="vm.searchForm" novalidate="" id="searchForm" role="form">
-            <div class="row">
-                <div class="col-md-12">
-
-                    <input type="text" class="form-control" id="inputSearchText" name="inputSearchText"
-                           ng-model="$ctrl.searchTerm"
-                           ng-focus="vm.setFocus(vm.searchForm.inputSearchText)"
-                           placeholder="Search"
-                           ng-pattern="/^[a-zA-Z ]+$/"
-                           required>
-                    <div ng-messages="vm.searchForm.inputSearchText.$error" ng-show="vm.showValidationErrors">
-                        <span class="errorMessage arrow_box" ng-message="required" class="text-danger">Required</span>
-                        <span class="errorMessage arrow_box" ng-message="pattern" class="text-danger">Invalid characters</span>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2" style="margin-top: 40px;">
+            <!--<form name="$ctrl.form" novalidate="" id="searchForm" role="form" style="width: 658px; margin: 30px auto 0 auto;">-->
+            <form name="$ctrl.form" novalidate="" id="form" role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" 
+                           id="searchTerm" name="searchTerm"
+                               ng-model="$ctrl.searchTerm"
+                               ng-focus="vm.setFocus($ctrl.form.searchTerm)"
+                               placeholder="Search"
+                               ng-pattern="/^[a-zA-Z ]+$/"
+                               required>
+                        <div ng-messages="$ctrl.form.searchTerm.$error" ng-show="vm.showValidationErrors">
+                            <span class="errorMessage arrow_box text-danger" ng-message="required">Required</span>
+                            <span class="errorMessage arrow_box text-danger" ng-message="pattern">Invalid characters</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-8 col-md-offset-2" style="margin-top: 50px;">
-        <button class="btn btn-danger btn-lg btn-custom pull-left" ng-click="$ctrl.gotoWelcome()">
-            <i class="fa fa-angle-left"></i>
-            GO BACK
-        </button>
-        <button class="btn btn-danger btn-lg btn-custom pull-right"
-                ng-click="$ctrl.gotoSearchResults()">
-            CONTINUE <i class="fa fa-angle-right"></i>
-        </button>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2" style="margin-top: 50px;">
+            <button class="btn btn-danger btn-lg pull-left" ng-click="$ctrl.gotoWelcome()">
+                <i class="fa fa-angle-left"></i>
+                GO BACK
+            </button>
+            <button class="btn btn-danger btn-lg pull-right"
+                    ng-click="$ctrl.gotoSearchResults()" ng-disabled="!$ctrl.searchTerm">
+                CONTINUE <i class="fa fa-angle-right"></i>
+            </button>
+        </div>
     </div>
 </div>

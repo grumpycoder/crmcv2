@@ -65,6 +65,7 @@
         }
 
         $ctrl.paged = function () {
+            $ctrl.visitor = null; 
             $ctrl.search(tableStateRef);
         }
 

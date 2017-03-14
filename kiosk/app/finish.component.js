@@ -26,7 +26,7 @@
             });
 
             $ctrl.countDown_tick = 3;
-            $ctrl.countDownWatch();
+            //$ctrl.countDownWatch();
         }
 
         this.$routerOnActivate = function (next) {

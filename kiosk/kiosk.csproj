@@ -176,6 +176,7 @@
     <Content Include="images\kioskbackground-16x9.png" />
     <Content Include="js\app.min.js" />
     <Content Include="js\vendor.min.js" />
+    <Content Include="fonts\HelveticaNeueLTStd-Lt.otf" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\hub.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
@@ -193,8 +194,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
