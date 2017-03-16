@@ -13,8 +13,9 @@ namespace web.Models
         public bool? IsDonor { get; set; }
         public bool? IsPriority { get; set; }
         public decimal? FuzzyMatchValue { get; set; }
+        public string[] FuzzyMatchRange { get; set; }
         public Guid? SortOrder { get; set; }
         public DateTime DateCreated { get; set; }
-
+        public int DaysOld { get; set; }
     }
 }

@@ -14,6 +14,7 @@
 
         $ctrl.$onInit = function() {
             console.log('init visitor list');
+            $ctrl.title = 'Visitors';
         }
 
         $ctrl.create = function () {
@@ -56,6 +57,14 @@
 
         $ctrl.search = function (tableState) {
             tableStateRef = tableState;
+            $ctrl.searchModel.fuzzyMatchRange = $ctrl.fuzzyMatchRange; 
+            $ctrl.searchModel.daysOld = $ctrl.days;
+
+            if (typeof (tableState.sort.predicate) !== "undefined") {
+                $ctrl.searchModel.orderBy = tableState.sort.predicate;
+                $ctrl.searchModel.orderDirection = tableState.sort.reverse ? 'desc' : 'asc';
+            }
+
             $http.get('api/visitor', { params: $ctrl.searchModel }).then(function (r) {
                 $ctrl.visitors = r.data.results;
                 $ctrl.searchModel = r.data;

@@ -216,6 +216,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\OrderExt.cs" />
     <Compile Include="Helpers\PredicateBuilder.cs" />
     <Compile Include="Hubs\NameNotificationHub.cs" />
     <Compile Include="Models\CensorSearchModel.cs" />
@@ -237,6 +239,7 @@
     <Content Include="app\configuration\configuration-setting.component.js" />
     <Content Include="app\directives\directives.modules.js" />
     <Content Include="app\directives\stTable.directive.js" />
+    <Content Include="app\filters\filters.js" />
     <Content Include="app\users\user-edit.component.html" />
     <Content Include="app\users\user-edit.component.js" />
     <Content Include="app\users\user-list.component.html" />

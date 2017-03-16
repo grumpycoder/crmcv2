@@ -9,7 +9,6 @@
             link: function (scope, element, attr, ctrl) {
                 return element.bind('click',
                     function () {
-                        console.log('search');
                         var tableCtrl = ctrl;
                         tableCtrl.pipe();
                     });

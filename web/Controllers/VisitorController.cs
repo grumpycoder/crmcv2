@@ -3,8 +3,10 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Http;
 using CRMC.DataAccess;
 using CRMC.Domain;
@@ -22,25 +24,40 @@ namespace web.Controllers
         public object Get([FromUri] VisitorSearchModel pager = null)
         {
             if (pager == null) pager = new VisitorSearchModel();
-
             var query = _context.People;
             var totalCount = query.Count();
 
             var pred = PredicateBuilder.True<Person>();
             if (!string.IsNullOrWhiteSpace(pager.Firstname))
                 pred = pred.And(p => p.Firstname.Contains(pager.Firstname));
-            if (!string.IsNullOrWhiteSpace(pager.Lastname)) pred = pred.And(p => p.Lastname.Contains(pager.Lastname));
+            if (!string.IsNullOrWhiteSpace(pager.Lastname))
+                pred = pred.And(p => p.Lastname.Contains(pager.Lastname));
             if (!string.IsNullOrWhiteSpace(pager.EmailAddress))
                 pred = pred.And(p => p.EmailAddress.Contains(pager.EmailAddress));
-            if (!string.IsNullOrWhiteSpace(pager.Zipcode)) pred = pred.And(p => p.Zipcode.Contains(pager.Zipcode));
-            //pred = pred.And(p => p.IsDonor == pager.IsDonor);
-            //pred = pred.And(p => p.IsPriority == pager.IsPriority);
+            if (!string.IsNullOrWhiteSpace(pager.Zipcode))
+                pred = pred.And(p => p.Zipcode.Contains(pager.Zipcode));
+
+            if (pager.FuzzyMatchRange != null && pager.FuzzyMatchRange.Length == 1)
+            {
+                var min = pager.FuzzyMatchRange[0].ToDecimal();
+                pred = pred.And(p => p.FuzzyMatchValue >= min);
+            }
+            if (pager.FuzzyMatchRange != null && pager.FuzzyMatchRange.Length == 2)
+            {
+                var min = pager.FuzzyMatchRange[0].ToDecimal();
+                var max = pager.FuzzyMatchRange[1].ToDecimal();
+                pred = pred.And(p => p.FuzzyMatchValue >= min && p.FuzzyMatchValue <= max);
+            }
+            var greaterThanDate = DateTime.Now.AddDays(pager.DaysOld * -1);
+            if (greaterThanDate.Date != DateTime.Today.Date) pred = pred.And(p => p.DateCreated >= greaterThanDate);
 
             var filteredQuery = query.Where(pred);
             var pagerCount = filteredQuery.Count();
 
             var results = filteredQuery
-                .OrderByDescending(e => e.DateCreated)
+                //.OrderByDescending(e => e.DateCreated)
+                .Order(pager.OrderBy, pager.OrderDirection == "desc" ? SortDirection.Descending : SortDirection.Ascending)
+                .ThenByDescending(m => m.DateCreated)
                 .Skip(pager.PageSize * (pager.Page - 1) ?? 0)
                 .Take(pager.PageSize ?? PAGE_SIZE)
                 .ToList();

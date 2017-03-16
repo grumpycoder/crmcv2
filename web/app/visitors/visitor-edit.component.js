@@ -8,17 +8,19 @@
         $ctrl.$onInit = function () {
             console.log('visitor edit init');
 
+            $ctrl.title = 'New Visitor';
+
             if ($ctrl.resolve) {
                 $ctrl.id = $ctrl.resolve.id;
             }
             if ($ctrl.id) {
-                $http.get('api/visitor/' + $ctrl.id).then(function (r) {
+                $http.get('api/visitor/' + $ctrl.id).then(function(r) {
                     $ctrl.visitor = r.data;
-                }).catch(function (err) {
+                    $ctrl.title = ($ctrl.visitor.firstname + ' ' + $ctrl.visitor.lastname);
+                }).catch(function(err) {
                     console.log('err', err.message);
                 });
-            }
-
+            } 
         }
 
         $ctrl.cancel = function () {

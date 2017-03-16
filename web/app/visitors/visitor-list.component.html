@@ -1,38 +1,57 @@
 ﻿
 <div st-table="$ctrl.model" st-pipe="$ctrl.search">
+    <div>
+        <h3 class="modal-title">{{$ctrl.title}}</h3>
+        <small>({{$ctrl.searchModel.filteredCount}} / {{$ctrl.searchModel.totalCount}}) Total Records</small>
+        <span class="pull-right">
+            <small>Page {{$ctrl.searchModel.page}} of {{$ctrl.searchModel.totalPages}}</small>
+        </span>
+
+    </div><!-- /.box-header -->
     <span>
         <button class="btn btn-primary" st-submit-search>
             <i class="glyphicon glyphicon-search"></i> Search
         </button>
 
         <button class="btn btn-default" st-reset-search ng-model="$ctrl.searchModel">
-            <i class="glyphicon glyphicon-erase"></i> Clear
+            <i class="glyphicon glyphicon-clear"></i> Clear
         </button>
     </span>
     <span class="pull-right">
-        <button class="btn btn-default" ng-click="$ctrl.create()">
-            <i class="glyphicon glyphicon-plus"></i> New
-        </button>
-    </span>
+        <span class="btn-group" st-submit-search tooltip="Filter by days match">
+            <label class="btn btn-danger" ng-model="$ctrl.fuzzyMatchRange" uncheckable uib-btn-radio="[0.81]" uib-tooltip=">80%">High</label>
+            <label class="btn btn-success" ng-model="$ctrl.fuzzyMatchRange" uncheckable uib-btn-radio="[0.5, 0.8]" uib-tooltip="50-80%">Medium</label>
+        </span>
 
+        <span class="btn-group" st-submit-search tooltip="Filter by days old">
+            <label class="btn btn-info" ng-model="$ctrl.days" uib-btn-radio="30" uncheckable>30 days</label>
+            <label class="btn btn-info" ng-model="$ctrl.days" uib-btn-radio="60" uncheckable>60 days</label>
+        </span>
+
+        <span>
+            <button class="btn btn-default" ng-click="$ctrl.create()">
+                <i class="glyphicon glyphicon-plus"></i> New
+            </button>
+        </span>
+    </span>
     <table class="table table-bordered table-responsive table-hover">
         <thead>
         <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email Address</th>
-            <th>Zipcode</th>
-            <th>Donor</th>
-            <th>Priority</th>
-            <th>Entry</th>
-            <th>Match</th>
+            <th st-sort="firstName">Firstname</th>
+            <th st-sort="lastName">Lastname</th>
+            <th st-sort="emailAddress">Email Address</th>
+            <th st-sort="zipcode">Zipcode</th>
+            <th st-sort="isDonor">Donor</th>
+            <th st-sort="isPriority">Priority</th>
+            <th st-sort="dateCreated">Entry</th>
+            <th st-sort="fuzzyMatchValue">Match</th>
             <th></th>
         </tr>
         <tr>
-            <td><input type="text" ng-model="$ctrl.searchModel.firstname" class="form-control" placeholder="Firstname" /></td>
-            <td><input type="text" ng-model="$ctrl.searchModel.lastname" class="form-control" placeholder="Lastname" /></td>
-            <td><input type="text" ng-model="$ctrl.searchModel.emailAddress" class="form-control" placeholder="Email Address" /></td>
-            <td><input type="text" ng-model="$ctrl.searchModel.zipcode" class="form-control" placeholder="Zipcode" /></td>
+            <td><input type="text" ng-model="$ctrl.searchModel.firstname" class="form-control" placeholder="Firstname"/></td>
+            <td><input type="text" ng-model="$ctrl.searchModel.lastname" class="form-control" placeholder="Lastname"/></td>
+            <td><input type="text" ng-model="$ctrl.searchModel.emailAddress" class="form-control" placeholder="Email Address"/></td>
+            <td><input type="text" ng-model="$ctrl.searchModel.zipcode" class="form-control" placeholder="Zipcode"/></td>
             <td></td>
             <td></td>
             <td></td>
@@ -52,7 +71,7 @@
             <td>
                 {{v.dateCreated | date:"MM/dd/yyyy" }}
             </td>
-            <td>{{v.fuzzyMatchValue}}</td>
+            <td>{{v.fuzzyMatchValue | percentage:1}}</td>
             <td class="text-nowrap">
                 <a ng-click="$ctrl.edit(v)">Edit</a> |
                 <a ng-click="$ctrl.delete(v)">Delete</a>
