@@ -78,34 +78,61 @@ namespace web.Controllers
         [HttpPost, Route("Update")]
         public async Task<object> Post([FromBody]UserViewModel vm)
         {
-            var user = UserManager.FindByName(vm.UserName);
+            ApplicationUser user;
+            IdentityResult result;
 
-            if (user != null)
+            if (string.IsNullOrEmpty(vm.Id))
             {
+                var existingUser = await UserManager.FindByNameAsync(vm.UserName);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("", "User already exiists");
+                    return Ok(vm);
+                }
+                user = new ApplicationUser() { UserName = vm.UserName, Email = vm.Email };
+                result = await UserManager.CreateAsync(user, vm.Password);
+                if (!result.Succeeded) return await GetErrorResult(result);
+            }
+            else
+            {
+                user = await UserManager.FindByNameAsync(vm.UserName);
                 user.UserName = vm.UserName;
                 user.Email = vm.Email;
-                //return BadRequest("Username already exists");
-                await UserManager.UpdateAsync(user);
-                return Ok(user);
+                result = await UserManager.UpdateAsync(user);
+                if (!result.Succeeded) return await GetErrorResult(result);
             }
 
-            user = new ApplicationUser()
-            {
-                UserName = vm.UserName,
-                Email = vm.Email,
-            };
+            var currentRoles = await UserManager.GetRolesAsync(user.Id);
 
-            IdentityResult addUserResult = await UserManager.CreateAsync(user, vm.Password);
+            var rolesNotExists = vm.Roles.Except(RoleManager.Roles.Select(x => x.Name)).ToArray();
 
-            if (!addUserResult.Succeeded)
+            if (rolesNotExists.Any())
             {
-                return await GetErrorResult(addUserResult);
+                ModelState.AddModelError("", $"Roles '{string.Join(",", rolesNotExists)}' does not exixts in the system");
+                return BadRequest(ModelState);
+            }
+            var removeResult = await UserManager.RemoveFromRolesAsync(user.Id, currentRoles.ToArray());
+
+            if (!removeResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Failed to remove user roles");
+                return BadRequest(ModelState);
+            }
+            result = await UserManager.AddToRolesAsync(user.Id, vm.Roles);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Failed to add user roles");
+                return BadRequest(ModelState);
             }
 
-            var addResult = await UserManager.AddToRolesAsync(user.Id, vm.Roles);
-            //TODO: Need automapping
-            vm.Id = user.Id;
-            return Ok(vm);
+            var model = Mapper.Map<ApplicationUser, UserViewModel>(user);
+
+            var roles = UserManager.GetRolesAsync(user.Id).Result.ToArray();
+
+            model.Roles = roles; 
+            return Ok(model);
+
         }
 
         //public async Task<object> Put([FromBody]UserViewModel vm)
@@ -145,6 +172,7 @@ namespace web.Controllers
         //    return Ok(vm);
         //}
 
+        [HttpDelete, Route("{id}")]
         public async Task<IHttpActionResult> Delete(string id)
         {
             var user = await UserManager.FindByIdAsync(id);

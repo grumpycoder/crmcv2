@@ -27,20 +27,20 @@
                 <th>Roles</th>
                 <th></th>
             </tr>
-            <tr>
-                <td><input type="text" ng-model="$ctrl.searchModel.username" class="form-control" placeholder="Search" /></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
         </thead>
         <tbody>
             <tr ng-repeat="u in $ctrl.users">
                 <td>{{u.userName}}</td>
                 <td>{{u.email}}</td>
                 <td>{{u.fullName}}</td>
-                <td>{{u.roles}}</td>
+                <!--<td>{{u.roles}}</td>-->
+                <td>
+                    <ul class="list-inline">
+                        <li ng-repeat="role in u.roles">
+                            <span class="label label-default">{{role}}</span>
+                        </li>
+                    </ul>
+                </td>
                 <td class="text-nowrap">
                     <a ng-click="$ctrl.edit(u)">Edit</a> |
                     <a ng-click="$ctrl.delete(u)">Delete</a>

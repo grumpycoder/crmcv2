@@ -6,10 +6,13 @@
         var $ctrl = this;
 
         $ctrl.$onInit = function () {
-            console.log('user edit init', $ctrl);
+            console.log('user edit init');
             if ($ctrl.resolve) {
                 $ctrl.user = $ctrl.resolve.user;
             }
+            $http.get('api/user/roles').then(function (r) {
+                $ctrl.roles = r.data;
+            });
         }
 
         $ctrl.cancel = function () {
@@ -17,9 +20,17 @@
         }
 
         $ctrl.save = function () {
-            console.log('save user', $ctrl.user);
+            if (!$ctrl.user.email) $ctrl.user.email = $ctrl.user.userName + '@splcenter.org'; 
+
+            var roles = [];
+            _.forEach($ctrl.user.roles,
+                function (role) {
+                    roles.push(role.name);
+                });
+            $ctrl.user.roles = roles;
+
             return $http.post('api/user/update', $ctrl.user).then(function (r) {
-                angular.extend($ctrl.user, r.data);
+                $ctrl.user = r.data; 
                 $ctrl.modalInstance.close($ctrl.user);
             }).catch(function (err) {
                 console.error('something went wrong', err.message);

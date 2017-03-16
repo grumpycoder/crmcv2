@@ -6,49 +6,47 @@
         var $ctrl = this;
 
         $ctrl.$onInit = function () {
-            console.log('user list init');
             $http.get('api/user').then(function (r) {
                 $ctrl.users = r.data;
-                console.log('users', $ctrl.users);
             });
         }
 
         $ctrl.create = function () {
+            //TODO: return roles display broken
             $modal.open({
                 component: 'userEdit',
-                bindings: {
-                    modalInstance: "<"
-                },
-                resolve: {
-                },
+                bindings: { modalInstance: "<" },
                 size: 'md'
             }).result.then(function (result) {
+                console.log(result);
+                var roles = [];
+                _.forEach(result.roles,
+                    function (role) {
+                        roles.push(role.name);
+                    });
+                console.log(roles);
+                result.roles = roles;
                 $ctrl.users.unshift(result);
             }, function (reason) {
             });
         }
 
-        $ctrl.edit = function (u) {
-            console.log('user', u);
+        $ctrl.edit = function (item) {
             $modal.open({
                 component: 'userEdit',
-                bindings: {
-                    modalInstance: "<"
-                },
-                resolve: {
-                    user: u
-                },
+                bindings: { modalInstance: "<" },
+                resolve: { user: angular.copy(item) },
                 size: 'md'
             }).result.then(function (result) {
-                angular.extend(u, result);
-            }, function (reason) {
-            });
+                angular.extend(item, result);
+            },
+                function (reason) { });
         }
 
         $ctrl.delete = function (c) {
             $http.delete('api/user/' + c.id).then(function (r) {
-                var idx = $ctrl.censors.indexOf(c);
-                $ctrl.censors.splice(idx, 1);
+                var idx = $ctrl.users.indexOf(c);
+                $ctrl.users.splice(idx, 1);
             });
         }
 
