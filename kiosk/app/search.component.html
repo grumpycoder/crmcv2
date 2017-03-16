@@ -7,25 +7,36 @@
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2" style="margin-top: 40px;">
-            <!--<form name="$ctrl.form" novalidate="" id="searchForm" role="form" style="width: 658px; margin: 30px auto 0 auto;">-->
             <form name="$ctrl.form" novalidate="" id="form" role="form">
                 <div class="form-group">
-                    <input type="text" class="form-control" 
-                           id="searchTerm" name="searchTerm"
-                               ng-model="$ctrl.searchTerm"
-                               ng-focus="vm.setFocus($ctrl.form.searchTerm)"
-                               placeholder="Search"
-                               ng-pattern="/^[a-zA-Z ]+$/"
-                               required>
-                        <div ng-messages="$ctrl.form.searchTerm.$error" ng-show="vm.showValidationErrors">
-                            <span class="errorMessage arrow_box text-danger" ng-message="required">Required</span>
-                            <span class="errorMessage arrow_box text-danger" ng-message="pattern">Invalid characters</span>
-                        </div>
+                    <input type="text" class="form-control" id="searchTerm" name="searchTerm"
+                           autofocus
+                           ng-change="$ctrl.startTimer()"
+                           ng-model="$ctrl.searchTerm"
+                           placeholder="Search"
+                           ng-pattern="/^[a-zA-Z ]+$/"
+                           required />
+                    <div ng-messages="$ctrl.form.searchTerm.$error" ng-show="vm.showValidationErrors">
+                        <span class="errorMessage arrow_box text-danger" ng-message="required">Required</span>
+                        <span class="errorMessage arrow_box text-danger" ng-message="pattern">Invalid characters</span>
                     </div>
+                </div>
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <on-screen-keyboard rows="[
+                         ['`','1', '2', '3', '4','5','6','7','8', '9', '0', {type: 'erase', text: 'DEL'}],
+                         ['','Q','W','E','R','T','Y','U','I','O','P','-'],
+                         ['','A','S','D','F','G','H','J','K','L',';', '\''],
+                        [{type: 'shift', upperCase: '&dArr;', lowerCase: '&uArr;'}, 'Z','X','C','V','B','N','M',',', '.','@',{type: 'shift', upperCase: '&dArr;', lowerCase: '&uArr;'}],
+                         [{type: 'space', colspan: 12, text: ' '}]
+                        ]" uppercase-all-words>
 
+            </on-screen-keyboard>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2" style="margin-top: 50px;">
             <button class="btn btn-danger btn-lg pull-left" ng-click="$ctrl.gotoWelcome()">

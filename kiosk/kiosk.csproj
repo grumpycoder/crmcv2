@@ -149,6 +149,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.module.js" />
+    <Content Include="app\directives\angular-on-screen-keyboard.html" />
+    <Content Include="app\directives\angular-on-screen-keyboard.js" />
     <Content Include="app\results.component.js" />
     <Content Include="app\search.component.html" />
     <Content Include="app\finish.component.html" />
@@ -162,6 +164,7 @@
     <Content Include="app\results.component.html" />
     <Content Include="app\welcome.component.html" />
     <Content Include="app\welcome.component.js" />
+    <Content Include="css\keyboard.css" />
     <Content Include="css\site.min.css" />
     <Content Include="css\vendor.min.css" />
     <Content Include="favicon.ico" />

@@ -2,39 +2,48 @@
 (function () {
     var module = angular.module('app');
     //TODO: GET hub url from settings
-    function controller($http, visitor) {
+    function controller($timeout, config, visitor) {
         var $ctrl = this;
+        var timer; 
 
         $ctrl.$onInit = function () {
+            console.log('pledge init');
             $ctrl.visitor = visitor.get();
-            console.log('pledge init', $ctrl);
+            $ctrl.startTimer();
         }
 
         this.$routerOnActivate = function (next) { };
 
         $ctrl.gotoWelcome = function () {
             visitor.clear();
+            $timeout.cancel(timer);
             this.$router.navigate(['Welcome']);
         }
 
         $ctrl.gotoRegister = function () {
+            $timeout.cancel(timer);
             this.$router.navigate(['Register']);
         }
 
         $ctrl.pledge = function () {
             if (!visitor.get().id) {
                 console.log('save new visitor', visitor.get());
-                $http.post('http://localhost:49960/api/visitor', visitor.get()).then(function (r) {
-                    console.log('saved new visitor', visitor.get());
-                }).catch(function (err) {
-                    console.error('something went wrong', err.message);
-                });
+                visitor.save();
             } else {
                 console.log('returning visitor', visitor.get());
             }
-
+            $timeout.cancel(timer);
             this.$router.navigate(['Finish']);
         }
+
+        $ctrl.startTimer = function () {
+            $timeout.cancel(timer);
+            timer = $timeout(function () {
+                visitor.clear();
+                $ctrl.$router.navigate(['Welcome']);
+            }, config.redirectTimeout);
+        }
+
     }
 
     module.component('pledge',
@@ -43,7 +52,7 @@
                 $router: '<'
             },
             templateUrl: 'app/pledge.component.html',
-            controller: ['$http', 'visitorService', controller]
+            controller: ['$timeout', 'config', 'visitorService', controller]
         });
 }
 )();

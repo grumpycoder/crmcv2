@@ -2,11 +2,11 @@
 (function () {
     var module = angular.module('app');
 
-    function controller(visitor) {
+    function controller() {
         var $ctrl = this; 
 
         $ctrl.$onInit = function() {
-            console.log('welcome init', visitor.get());
+            console.log('welcome init');
         }
 
         this.$routerOnActivate = function (next) { };
@@ -24,7 +24,7 @@
         {
             bindings: { $router: '<' },
             templateUrl: 'app/welcome.component.html', 
-            controller: ['visitorService', controller]
+            controller: [controller]
         });
 
 }

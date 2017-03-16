@@ -1,12 +1,11 @@
 ﻿//visitor.service.js
 (function () {
     var module = angular.module('app');
-    //TODO: Implement search
-
-    function factory() {
+    
+    function factory($http, config) {
         var visitor = {};
         var term = '';
-
+        
         return {
             clear: clear,
             clearTerm: clearTerm, 
@@ -14,6 +13,7 @@
             getTerm: getTerm,
             set: set,
             setTerm: setTerm,
+            save: save, 
             search: search
         };
 
@@ -41,20 +41,23 @@
             term = t;
         }
 
-        function search(term) {
-            console.log('search for ' + term);
-            return [
-                { firstname: 'Mark', lastname: 'Lawrence', zipcode: '11111' },
-                { firstname: 'John', lastname: 'Doe', zipcode: '11111' },
-                { firstname: 'Brent', lastname: 'Jones', zipcode: '11111' },
-                { firstname: 'Hugh', lastname: 'Jackman', zipcode: '11111' },
-                { firstname: 'Jack', lastname: 'Mandela', zipcode: '11111' },
-            ]; 
+        function search(model) {
+            return $http.get(config.apiUrl, { params: model }).then(function (r) {
+                return r.data; 
+            });
+        }
+
+        function save(v) {
+            $http.post(config.apiUrl, visitor).then(function (r) {
+                console.log('saved new visitor', visitor);
+            }).catch(function (err) {
+                console.error('something went wrong', err.message);
+            });
         }
 
     }
 
-    module.factory('visitorService', ['$http', factory]);
+    module.factory('visitorService', ['$http', 'config', factory]);
 
 }
 )();

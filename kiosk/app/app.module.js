@@ -1,6 +1,6 @@
 ﻿//app.module.js
 (function () {
-    var module = angular.module('app', ['ngComponentRouter', 'ui.bootstrap', 'ngMessages']);
+    var module = angular.module('app', ['ngComponentRouter', 'ui.bootstrap', 'ngMessages', 'onScreenKeyboard']);
 
     module.component('kiosk',
         {
@@ -14,6 +14,15 @@
                 { path: '/results', name: 'Results', component: 'results' }
             ]
         });
+
     module.value('$routerRootComponent', 'kiosk');
+    module.value('remoteApi', { url: 'http://localhost:49960/api/' });
+    module.value('config',
+    {
+        apiUrl: 'http://localhost:49960/api/visitor', 
+        hubUrl: 'http://localhost:49960/signalr', 
+        redirectTimeout: 30000, 
+        finishTimeout : 3
+    });
 }
 )();

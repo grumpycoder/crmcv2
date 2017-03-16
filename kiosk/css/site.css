@@ -76,10 +76,11 @@ input, input[type="text"] {
     color: #d12229;
     background-color: #ffffff;
 }
-.btn-white:hover {
-    color: #d12229;
-    background-color: #ffffff;
-}
+
+    .btn-white:hover {
+        color: #d12229;
+        background-color: #ffffff;
+    }
 
 .text-huge {
     font-size: 54px;
@@ -94,18 +95,30 @@ input, input[type="text"] {
     font-weight: bold;
 }
 
-table tbody {
-    margin: 20px auto 0 auto;
+.grid {
+    height: 490px;
+    min-height: 490px;
+    margin: 0 auto;
+    overflow: visible;
     background-color: #ffffff;
     color: #7a7a7a;
     -ms-opacity: 0.7;
     opacity: 0.7;
 }
 
-    table tbody > tr > td {
-        padding-left: 25px !important;
-        padding-right: 25px !important;
+    .grid table {
+        margin: 0 auto;
+        overflow: visible;
     }
+
+        .grid table tbody {
+            margin: 20px auto 0 auto;
+        }
+
+table tbody > tr > td {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+}
 
 .ng-table-rowselected tr {
     cursor: pointer;
@@ -204,4 +217,8 @@ table tbody {
     height: inherit;
     line-height: 38px;
     font-size: 20px;
+}
+
+pre {
+    display: none;
 }

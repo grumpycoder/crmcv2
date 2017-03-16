@@ -12,9 +12,9 @@
                 <div class="row">
 
                     <div class="col-md-12">
-                        <input type="text" class="form-control" id="firstname"
-                               ng-focus="vm.setFocus(firstname)"
-                               name="firstname" ng-model="$ctrl.visitor.firstname" required="" placeholder="First Name"
+                        <input type="text" class="form-control" id="firstname" name="firstname" autofocus
+                               ng-change="$ctrl.startTimer()"
+                               ng-model="$ctrl.visitor.firstname" required="" placeholder="First Name"
                                ng-required="true"
                                ng-pattern="/^[a-zA-Z, `-]*$/"
                                ng-maxlength="50" />
@@ -33,9 +33,9 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="text" class="form-control" id="lastname"
-                               name="lastname" ng-model="$ctrl.visitor.lastname" placeholder="Last Name"
-                               ng-focus="vm.setFocus($ctrl.form.lastname)"
+                        <input type="text" class="form-control" id="lastname" name="lastname" 
+                               ng-change="$ctrl.startTimer()"
+                               ng-model="$ctrl.visitor.lastname" placeholder="Last Name"
                                required
                                ng-pattern="/^[a-zA-Z, `-]*$/"
                                ng-maxlength="50" />
@@ -53,26 +53,23 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="text" class="form-control" id="zipcode"
-                               name="zipcode"
-                               ng-focus="vm.setFocus($ctrl.form.zipcode)"
+                        <input type="text" class="form-control" id="zipcode" name="zipcode"
+                               ng-change="$ctrl.startTimer()"
                                ng-model="$ctrl.visitor.zipcode"
                                placeholder="ZIP Code (optional)"
                                zip-code />
-
-                            <span class="errorMessage arrow_box" ng-show="vm.showValidationErrors && $ctrl.form.zipcode.$error.invalid">Invalid</span>
-                            <div ng-messages="$ctrl.form.zipcode.$error" ng-show="$ctrl.form.zipcode.$invalid && ($ctrl.form.zipcode.$touched || $ctrl.form.zipcode.$dirty)">
-                                <span class="errorMessage arrow_box text-danger" ng-message="zipCode">Invalid zip code</span>
-                            </div>
+                        <span class="errorMessage arrow_box" ng-show="vm.showValidationErrors && $ctrl.form.zipcode.$error.invalid">Invalid</span>
+                        <div ng-messages="$ctrl.form.zipcode.$error" ng-show="$ctrl.form.zipcode.$invalid && ($ctrl.form.zipcode.$touched || $ctrl.form.zipcode.$dirty)">
+                            <span class="errorMessage arrow_box text-danger" ng-message="zipCode">Invalid zip code</span>
+                        </div>
 
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="text" class="form-control" id="email"
-                               name="email"
-                               ng-focus="vm.setFocus($ctrl.form.email)"
+                        <input type="text" class="form-control" id="email" name="email"
+                               ng-change="$ctrl.startTimer()"
                                ng-model="$ctrl.visitor.emailAddress"
                                ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/"
                                placeholder="Email Address (optional)" />
@@ -87,14 +84,27 @@
             </form>
         </div>
     </div>
+    
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <on-screen-keyboard rows="[
+                         ['`','1', '2', '3', '4','5','6','7','8', '9', '0', {type: 'erase', text: 'DEL'}],
+                         ['','Q','W','E','R','T','Y','U','I','O','P','-'],
+                         ['','A','S','D','F','G','H','J','K','L',';', '\''],
+                        [{type: 'shift', upperCase: '&dArr;', lowerCase: '&uArr;'}, 'Z','X','C','V','B','N','M',',', '.','@',{type: 'shift', upperCase: '&dArr;', lowerCase: '&uArr;'}],
+                         [{type: 'space', colspan: 12, text: ' '}]
+                        ]" uppercase-all-words>
 
+        </on-screen-keyboard>
+    </div>
+</div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div style="margin-top: 50px;">
-                <button class="btn btn-danger btn-lg btn-custom pull-left" ng-click="$ctrl.gotoWelcome()">
+                <button class="btn btn-danger btn-lg pull-left" ng-click="$ctrl.gotoWelcome()">
                     <i class="fa fa-angle-left"></i> GO BACK
                 </button>
-                <button class="btn btn-danger btn-lg btn-custom pull-right"
+                <button class="btn btn-danger btn-lg pull-right"
                         ng-click="$ctrl.gotoPledge()" ng-disabled="$ctrl.form.$invalid">
                     CONTINUE <i class="fa fa-angle-right"></i>
                 </button>

@@ -2,9 +2,9 @@
 (function () {
     var module = angular.module('app');
     //TODO: GET hub url from settings
-    function controller($http, visitor) {
+    function controller(config, $timeout, visitor) {
         var $ctrl = this;
-
+        var timer; 
         var pageSizeDefault = 10;
         var tableStateRef;
 
@@ -18,7 +18,7 @@
         }
 
         $ctrl.$onInit = function () {
-            console.log('search init', visitor.getTerm());
+            console.log('search init');
 
             const names = visitor.getTerm().split(' ');
             if (names.length > 1) {
@@ -28,45 +28,52 @@
                 $ctrl.searchModel.lastname = names[0]; 
             }
 
-            $http.get('http://localhost:49960/api/visitor', { params: $ctrl.searchModel }).then(function (r) {
-                $ctrl.visitors = r.data.results;
-                $ctrl.searchModel = r.data;
-                delete $ctrl.searchModel.results;
-                console.log('visitors', $ctrl.visitors);
-            });
-
+            $ctrl.search();
         }
 
         $ctrl.gotoWelcome = function () {
+            $timeout.cancel(timer);
             this.$router.navigate(['Welcome']);
         }
 
         $ctrl.gotoSearch = function () {
+            $timeout.cancel(timer);
             this.$router.navigate(['Search']);
         }
 
         $ctrl.pledge = function () {
             visitor.clearTerm();
+            $timeout.cancel(timer);
             this.$router.navigate(['Pledge']);
         }
 
         $ctrl.toggleName = function (v) {
             $ctrl.visitor = v;
             visitor.set(v);
+            $ctrl.startTimer();
         }
 
         $ctrl.search = function (tableState) {
             tableStateRef = tableState;
-            $http.get('http://localhost:49960/api/visitor', { params: $ctrl.searchModel }).then(function (r) {
-                $ctrl.visitors = r.data.results;
-                $ctrl.searchModel = r.data;
+            return visitor.search($ctrl.searchModel).then(function (r) {
+                $ctrl.visitors = r.results;
+                $ctrl.searchModel = r;
                 delete $ctrl.searchModel.results;
-            });
+                $ctrl.startTimer();
+            }); 
         }
 
         $ctrl.paged = function () {
             $ctrl.visitor = null; 
             $ctrl.search(tableStateRef);
+        }
+
+        $ctrl.startTimer = function () {
+            $timeout.cancel(timer);
+            timer = $timeout(function () {
+                visitor.clear();
+                $ctrl.$router.navigate(['Welcome']);
+            }, config.redirectTimeout);
         }
 
     }
@@ -75,7 +82,7 @@
         {
             bindings: { $router: '<' },
             templateUrl: 'app/results.component.html',
-            controller: ['$http', 'visitorService', controller]
+            controller: ['config', '$timeout', 'visitorService', controller]
         });
 }
 )();
