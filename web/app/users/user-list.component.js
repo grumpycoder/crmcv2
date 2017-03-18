@@ -6,6 +6,7 @@
         var $ctrl = this;
 
         $ctrl.$onInit = function () {
+            $ctrl.title = 'Users';
             $http.get('api/user').then(function (r) {
                 $ctrl.users = r.data;
             });
@@ -18,15 +19,19 @@
                 bindings: { modalInstance: "<" },
                 size: 'md'
             }).result.then(function (result) {
-                console.log(result);
+                var user = result; 
                 var roles = [];
                 _.forEach(result.roles,
                     function (role) {
-                        roles.push(role.name);
+                        console.log('role', role);
+                        roles.push(role);
                     });
-                console.log(roles);
-                result.roles = roles;
-                $ctrl.users.unshift(result);
+                user.roles = []; 
+                console.log('result', user);
+                user.roles = [] = roles;
+                console.log('roles', roles);
+                console.log('result', user);
+                $ctrl.users.unshift(user);
             }, function (reason) {
             });
         }
@@ -38,6 +43,7 @@
                 resolve: { user: angular.copy(item) },
                 size: 'md'
             }).result.then(function (result) {
+                    console.log('result', result);
                 angular.extend(item, result);
             },
                 function (reason) { });

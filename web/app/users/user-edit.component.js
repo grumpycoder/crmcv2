@@ -20,17 +20,18 @@
         }
 
         $ctrl.save = function () {
-            if (!$ctrl.user.email) $ctrl.user.email = $ctrl.user.userName + '@splcenter.org'; 
+            if (!$ctrl.user.email) $ctrl.user.email = $ctrl.user.userName + '@splcenter.org';
 
             var roles = [];
             _.forEach($ctrl.user.roles,
                 function (role) {
                     roles.push(role.name);
                 });
+            if (roles.length === 0) roles.push('user');
             $ctrl.user.roles = roles;
 
             return $http.post('api/user/update', $ctrl.user).then(function (r) {
-                $ctrl.user = r.data; 
+                angular.extend($ctrl.user, r.data);
                 $ctrl.modalInstance.close($ctrl.user);
             }).catch(function (err) {
                 console.error('something went wrong', err.message);
