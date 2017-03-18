@@ -56,6 +56,10 @@
 
         $ctrl.search = function (tableState) {
             tableStateRef = tableState;
+            if (typeof (tableState.sort.predicate) !== "undefined") {
+                $ctrl.searchModel.orderBy = tableState.sort.predicate;
+                $ctrl.searchModel.orderDirection = tableState.sort.reverse ? 'desc' : 'asc';
+            }
             $http.get('api/censor', { params: $ctrl.searchModel }).then(function (r) {
                 $ctrl.censors = r.data.results;
                 $ctrl.searchModel = r.data;

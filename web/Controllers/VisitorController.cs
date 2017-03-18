@@ -55,7 +55,6 @@ namespace web.Controllers
             var pagerCount = filteredQuery.Count();
 
             var results = filteredQuery
-                //.OrderByDescending(e => e.DateCreated)
                 .Order(pager.OrderBy, pager.OrderDirection == "desc" ? SortDirection.Descending : SortDirection.Ascending)
                 .ThenByDescending(m => m.DateCreated)
                 .Skip(pager.PageSize * (pager.Page - 1) ?? 0)

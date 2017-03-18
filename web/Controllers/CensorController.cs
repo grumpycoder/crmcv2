@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Http;
 using CRMC.DataAccess;
 using CRMC.Domain;
@@ -31,7 +32,7 @@ namespace web.Controllers
             var pagerCount = filteredQuery.Count();
 
             var results = filteredQuery
-                .OrderBy(e => e.Word)
+                .Order(pager.OrderBy, pager.OrderDirection == "desc" ? SortDirection.Descending : SortDirection.Ascending)
                 .Skip(pager.PageSize * (pager.Page - 1) ?? 0)
                 .Take(pager.PageSize ?? PAGE_SIZE)
                 .ToList();
