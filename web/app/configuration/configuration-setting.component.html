@@ -4,66 +4,57 @@
     <fieldset>
         
         <div class="form-group">
-            <label class="control-label">Volume</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.volume" autofocus />
-            <label class="control-label">{{ $ctrl.configuration.volume  }}</label>
+            <label class="control-label">Volume: {{ $ctrl.configuration.volume  }}</label>
             <slider floor="0" ceiling="100" step="1" precision="2" ng-model="$ctrl.configuration.volume"></slider>
         </div>
 
         <div class="form-group">
-            <label class="control-label">Min Font Size</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.minFontSize" autofocus />
+            <span><label class="control-label">Min Font Sizes: {{ $ctrl.configuration.minFontSize }}</label></span>
+            <span class="pull-right"><label class="control-label">Max Font Sizes: {{ $ctrl.configuration.maxFontSize }}</label></span>
+            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model-low="$ctrl.configuration.minFontSize" ng-model-high="$ctrl.configuration.maxFontSize"></slider>
+        </div>
+        <div class="form-group">
+            <span><label class="control-label">Scroll Speed: {{ $ctrl.configuration.scrollSpeed }}</label></span>
             <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.scrollSpeed"></slider>
         </div>
-        <div class="form-group">
-            <label class="control-label">Max Font Size</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.maxFontSize" autofocus />
-            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.scrollSpeed"></slider>
-        </div>
 
 
         <div class="form-group">
-            <label class="control-label">Kiosk Entry Top Margin</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.kioskEntryTopMargin" autofocus />
+            <label class="control-label">Kiosk Entry Top Margin: {{ $ctrl.configuration.kioskEntryTopMargin }}</label>
+            <slider floor="0" ceiling="500" step="0.1" ng-model="$ctrl.configuration.kioskEntryTopMargin"></slider>
         </div>
 
         <div class="form-group">
-            <label class="control-label">Screen Bottom Margin</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.screenBottomMargin" autofocus />
-            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.screenBottomMargin"></slider>
+            <label class="control-label">Screen Bottom Margin: {{ $ctrl.configuration.screenBottomMargin }}</label>
+            <slider floor="0" ceiling="1000" step="1" ng-model="$ctrl.configuration.screenBottomMargin"></slider>
         </div>
         <div class="form-group">
-            <label class="control-label">General Rotation Delay</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.generalRotationDelay" autofocus />
-            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.generalRotationDelay"></slider>
+            <label class="control-label">General Rotation Delay: {{ $ctrl.configuration.generalRotationDelay }}</label>
+            <slider floor="0.0" ceiling="20" step="0.1" precision="2" ng-model="$ctrl.configuration.generalRotationDelay"></slider>
         </div>
         <div class="form-group">
-            <label class="control-label">Priority Rotation Delay</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.priorityRotationDelay" autofocus />
-            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.priorityRotationDelay"></slider>
+            <label class="control-label">Priority Rotation Delay: {{ $ctrl.configuration.priorityRotationDelay }}</label>
+            <slider floor="0.0" ceiling="50" step="1" ng-model="$ctrl.configuration.priorityRotationDelay"></slider>
         </div>
         
         <div class="form-group">
-            <label class="control-label">Kiosk Display Recycle Count</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.kioskDisplayRecycleCount" autofocus />
-            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.kioskDisplayRecycleCount"></slider>
+            <label class="control-label">Kiosk Display Recycle Count: {{ $ctrl.configuration.kioskDisplayRecycleCount }}</label>
+            <slider floor="0" ceiling="10" step="1" ng-model="$ctrl.configuration.kioskDisplayRecycleCount"></slider>
         </div>
         
+        <div class="form-group">
+            <label class="control-label">Grow Animation Duration: {{ $ctrl.configuration.growAnimationDuration }}</label>
+            <slider floor="0.0" ceiling="20" step="0.1" precision="2" ng-model="$ctrl.configuration.growAnimationDuration"></slider>
+        </div>
 
         <div class="form-group">
-            <label class="control-label">Grow Animation Duration</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.growAnimationDuration" autofocus />
-            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.growAnimationDuration"></slider>
+            <label class="control-label">Shrink Animation Duration: {{ $ctrl.configuration.shrinkAnimationDuration }}</label>
+            <slider floor="0.0" ceiling="20" step="0.1" precision="2" ng-model="$ctrl.configuration.shrinkAnimationDuration"></slider>
         </div>
+
         <div class="form-group">
-            <label class="control-label">Shrink Animation Duration</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.shrinkAnimationDuration" autofocus />
-            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.shrinkAnimationDuration"></slider>
-        </div>
-        <div class="form-group">
-            <label class="control-label">Fall Animation Duration Time Modifier</label>
-            <input type="text" class="form-control" ng-model="$ctrl.configuration.fallAnimationDurationTimeModifier" autofocus />
-            <slider floor="0.0" ceiling="50" step="0.1" precision="2" ng-model="$ctrl.configuration.fallAnimationDurationTimeModifier"></slider>
+            <label class="control-label">Fall Animation Duration Time Modifier: {{ $ctrl.configuration.fallAnimationDurationTimeModifier }}</label>
+            <slider floor="0" ceiling="50" step="1" ng-model="$ctrl.configuration.fallAnimationDurationTimeModifier"></slider>
         </div>
 
     </fieldset>
