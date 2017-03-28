@@ -38,6 +38,13 @@ namespace CRMC.DataAccess
             builder.Entity<Configuration>().ToTable("Configuration");
             builder.Entity<ConfigurationColor>().ToTable("ConfigurationColors");
             builder.Entity<Configuration>().ToTable("Configuration");
+
+
+            //builder.Entity<ApplicationUser>().ToTable("Users", "Security");
+            //builder.Entity<IdentityUserRole>().ToTable("UserRoles", "Security");
+            //builder.Entity<IdentityUserClaim>().ToTable("UserClaims", "Security");
+            //builder.Entity<IdentityUserLogin>().ToTable("UserLogins", "Security");
+            //builder.Entity<IdentityRole>().ToTable("Roles", "Security");
         }
     }
 }

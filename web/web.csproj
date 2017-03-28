@@ -237,6 +237,8 @@
     <Content Include="app\censors\censor-edit.component.html" />
     <Content Include="app\configuration\configuration-setting.component.html" />
     <Content Include="app\configuration\configuration-setting.component.js" />
+    <Content Include="app\dashboard\dashboard.component.html" />
+    <Content Include="app\dashboard\dashboard.component.js" />
     <Content Include="app\directives\directives.modules.js" />
     <Content Include="app\directives\stTable.directive.js" />
     <Content Include="app\filters\filters.js" />

@@ -1,0 +1,84 @@
+﻿
+
+<div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Visitors</h3>
+            <ul class="today-datas">
+                <li class="bgreen">
+                    <a href="#/attendees">
+                        <div class="pull-left">
+                            <i class="fa fa-group"></i>
+                        </div>
+                        <div class="datas-text pull-right">
+                            <span class="bold">{{$ctrl.summary.dayTotal}}</span> Today
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+
+                <li class="bviolet">
+                    <a href="#/speakers">
+                        <div class="pull-left">
+                            <i class="fa fa-group"></i>
+                        </div>
+                        <div class="datas-text pull-right">
+                            <span class="bold">{{$ctrl.summary.monthTotal}}</span> This Month
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+
+                <li class="borange">
+                    <a href="#/sessions">
+                        <div class="pull-left">
+                            <i class="fa fa-group"></i>
+                        </div>
+                        <div class="datas-text pull-right">
+                            <span class="bold">{{$ctrl.summary.total}}</span> Total
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <h3>Latest Visitors</h3>
+            <table class="table table-condensed table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Zipcode</th>
+                        <th>Date Added</th>
+                        <th>Fuzzy Match</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="visitor in $ctrl.summary.visitors">
+                        <td>{{ visitor.firstname }} {{ visitor.lastname }}</td>
+                        <td>{{ visitor.zipcode }}</td>
+                        <td>{{ visitor.dateCreated }}</td>
+                        <td>{{ visitor.fuzzyMatchValue | percentage:1 }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <i class="fa fa-refresh pull-right" ng-click="$ctrl.refresh()">
+                            </i>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!--<pre>
+            {{ $ctrl.summary | json }}
+    </pre>-->
+</div>

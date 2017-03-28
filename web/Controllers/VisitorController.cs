@@ -149,5 +149,36 @@ namespace web.Controllers
                 .ToListAsync();
             return Ok(list);
         }
+
+        [HttpGet, Route("summary")]
+        public object GetSummary()
+        {
+            var query = _context.People;
+            var baseCount = query.Count();
+            var fromDate = DateTime.Now.Subtract(TimeSpan.FromDays(30));
+            var nowDate = DateTime.Now.Date;
+            var monthCount = query.Count(e => e.DateCreated >= fromDate);
+            var dayCount = query.Count(e => e.DateCreated > nowDate);
+
+            var list = query.OrderByDescending(e => e.DateCreated).Skip(0).Take(10);
+
+            var result = new VisitorSummary()
+            {
+                Total = baseCount,
+                MonthTotal = monthCount,
+                DayTotal = dayCount,
+                Visitors = list
+            };
+
+            return result;
+        }
+    }
+
+    public class VisitorSummary
+    {
+        public int? Total { get; set; }
+        public int? MonthTotal { get; set; }
+        public int? DayTotal { get; set; }
+        public IQueryable<Person> Visitors { get; set; }
     }
 }
