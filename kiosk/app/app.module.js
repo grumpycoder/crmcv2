@@ -22,7 +22,7 @@
         apiUrl: 'http://localhost:49960/api/visitor', 
         hubUrl: 'http://localhost:49960/signalr', 
         redirectTimeout: 30000, 
-        finishTimeout : 3
+        finishTimeout : 4
     });
 }
 )();

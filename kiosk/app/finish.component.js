@@ -6,7 +6,7 @@
         var $ctrl = this;
 
         $ctrl.$onInit = function () {
-            console.log('finish init');
+            console.log('finish init', config);
             $.connection.hub.url = config.hubUrl;
             var hub = $.connection.nameNotificationHub;
             $.connection.hub.start().done(function() {
@@ -25,10 +25,11 @@
         $ctrl.startTimer = function () {
             if ($ctrl.countDown_tick <= 0) {
                 visitor.clear();
+                console.log('timer finished');
                 $ctrl.$router.navigate(['Welcome']);
             } else {
                 $ctrl.countDown_tick--;
-                $timeout($ctrl.countDownWatch, 1000);
+                $timeout($ctrl.startTimer, 1000);
             }
         };
 
