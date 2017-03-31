@@ -19,7 +19,6 @@
 
         $ctrl.$onInit = function () {
             console.log('search init');
-
             const names = visitor.getTerm().split(' ');
             if (names.length > 1) {
                 $ctrl.searchModel.firstname = names[0]; 
@@ -55,11 +54,13 @@
 
         $ctrl.search = function (tableState) {
             tableStateRef = tableState;
+            $ctrl.loading = true;
             return visitor.search($ctrl.searchModel).then(function (r) {
                 $ctrl.visitors = r.results;
                 $ctrl.searchModel = r;
                 delete $ctrl.searchModel.results;
                 $ctrl.startTimer();
+                $ctrl.loading = false;
             }); 
         }
 

@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using CRMC.Domain;
 using wot.Extensions;
 
 namespace wot.ViewModels
@@ -43,12 +42,12 @@ namespace wot.ViewModels
             Lane = lane;
             TotalCanvasWidth = canvasWidth;
             Label = CreateLabel(person);
-            Border = CreateBorder(Label, lane, person.CurrentDisplayCount);
+            Border = CreateBorder(Label, lane);
             GetXAxis();
             GetYAxis();
         }
 
-        private Border CreateBorder(Label label, IDisplayLane lane, int rotationCount)
+        private Border CreateBorder(Label label, IDisplayLane lane)
         {
             var borderName = "border" + Guid.NewGuid().ToString("N").Substring(0, 10);
             var width = lane.GetType() == typeof(KioskDisplayLane) && Person.IsFirstRun ? lane.LaneWidth : label.ActualWidth;
@@ -70,25 +69,24 @@ namespace wot.ViewModels
             var color = RandomColor();
             var fontSize = RandomNumber(minFont, maxFont);
             var name = "label" + Guid.NewGuid().ToString("N").Substring(0, 10);
+
             var label = new Label()
             {
                 Content = person.ToString(),
-                //TODO: Refactor complex expression
-                FontSize = Lane.GetType() == typeof(KioskDisplayLane) && person.IsFirstRun ? maxFont : fontSize,
-                //FontFamily = new FontFamily(SettingsManager.Configuration.FontFamily),
+                FontSize = Lane.GetType() == typeof(KioskDisplayLane) ? maxFont : fontSize,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Name = name,
                 Tag = name,
                 Uid = name,
                 Foreground = new SolidColorBrush(color)
             };
-
             label.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
             label.Arrange(new Rect(label.DesiredSize));
             if (Lane.GetType() != typeof(KioskDisplayLane)) return label;
             if (!(label.ActualWidth > Lane.LaneWidth)) return label;
 
-            Console.WriteLine($"Label to large {Person}");
+            //Console.WriteLine($"Label to large {Person}");
+            //TODO: Check if label too large 
             return label;
         }
 
@@ -132,6 +130,7 @@ namespace wot.ViewModels
                 var shrink = CreateShrinkAnimation(_currentTime, _configuration.ShrinkAnimationDuration);
                 list.Add(shrink);
                 _currentTime += grow.Duration.TimeSpan.Seconds;
+                Label.FontSize = _configuration.MaxFontSize;
             }
             var timeModifier = _configuration.FallAnimationDurationTimeModifier;
 

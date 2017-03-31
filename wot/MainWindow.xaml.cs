@@ -67,7 +67,7 @@ namespace wot
             var width = _canvas.ActualWidth;
 
             //Kiosk Lanes
-            for (var i = 1; i < 5; i++)
+            for (var i = 1; i <= 4; i++)
             {
                 //TODO: Refactor out width
                 Lanes.Add(new KioskDisplayLane(laneIndex: i, canvasWidth: width, totalLanes: 4));
@@ -88,7 +88,7 @@ namespace wot
             {
                 AsyncHelper.FireAndForget(() => DisplayScreenModelAsync(lane), e =>
                 {
-                    Console.WriteLine($"Error starting loop for lane {lane.LaneIndex}");
+                    Console.WriteLine($@"Error starting loop for lane {lane.LaneIndex}");
                     Debug.WriteLine(e);
                 });
             }
@@ -100,13 +100,12 @@ namespace wot
             {
                 foreach (var person in lane.People.ToList())
                 {
-                    //Console.WriteLine($"displaying {lane.LaneIndex} : {person}");
-
                     if (lane.GetType() == typeof(KioskDisplayLane))
                     {
                         if ((DateTime.Now >= person.NextDisplayTime))
                         {
                             person.CurrentDisplayCount += 1;
+                            Debug.WriteLine($"Displaying {person} for {person.CurrentDisplayCount} in lane {lane.LaneIndex}");
                             await Animate(person, lane);
                             //TODO: Refactor out RecycleCount
                             if (person.CurrentDisplayCount > Configuration.KioskDisplayRecycleCount) lane.People.Remove(person);
@@ -197,7 +196,6 @@ namespace wot
 
         private void ConfigurationChange(Configuration config)
         {
-            Console.WriteLine($"Wall Configuration changed.");
             Configuration = config;
             Dispatcher.InvokeAsync(() =>
             {
