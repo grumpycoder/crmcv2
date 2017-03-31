@@ -2,7 +2,7 @@
 (function () {
     var module = angular.module('app');
 
-    function controller($http, $modal) {
+    function controller($http, $modal, toastr) {
         var $ctrl = this;
         var pageSizeDefault = 10;
         var tableStateRef;
@@ -27,6 +27,7 @@
                 size: 'md'
             }).result.then(function (result) {
                 $ctrl.censors.unshift(result);
+                toastr.success('Saved Censor'); 
             }, function (reason) {
             });
         }
@@ -43,6 +44,7 @@
                 size: 'md'
             }).result.then(function (result) {
                 angular.extend(c, result);
+                toastr.success('Updated Censor');
             }, function (reason) {
             });
         }
@@ -51,6 +53,7 @@
             $http.delete('api/censor/' + c.id).then(function (r) {
                 var idx = $ctrl.censors.indexOf(c);
                 $ctrl.censors.splice(idx, 1);
+                toastr.warning('Deleted censor');
             });
         }
 
@@ -75,7 +78,7 @@
     module.component('censorList',
         {
             templateUrl: 'app/censors/censor-list.component.html',
-            controller: ['$http', '$uibModal', controller]
+            controller: ['$http', '$uibModal', 'toastr', controller]
         });
 }
 )();

@@ -2,7 +2,7 @@
 (function () {
     var module = angular.module('app');
 
-    function controller($http, $modal) {
+    function controller($http, $modal, toastr) {
         var $ctrl = this; 
         var pageSizeDefault = 10;
         var tableStateRef;
@@ -28,6 +28,7 @@
                 size: 'md'
             }).result.then(function (result) {
                 $ctrl.visitors.unshift(result);
+                toastr.success('Created Visitor');
             }, function (reason) {
             });
         }
@@ -44,6 +45,7 @@
                 size: 'md'
             }).result.then(function (result) {
                 angular.extend(v, result);
+                toastr.success('Updated Visitor');
             }, function (reason) {
             });
         }
@@ -52,6 +54,7 @@
             $http.delete('api/visitor/' + v.id).then(function(r) {
                 var idx = $ctrl.visitors.indexOf(v);
                 $ctrl.visitors.splice(idx, 1);
+                toastr.warning('Deleted Visitor');
             });
         }
 
@@ -81,7 +84,7 @@
     module.component('visitorList',
         {
             templateUrl: 'app/visitors/visitor-list.component.html',
-            controller: ['$http', '$uibModal', controller]
+            controller: ['$http', '$uibModal', 'toastr', controller]
         });
 }
 )();

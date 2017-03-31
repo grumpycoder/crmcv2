@@ -2,7 +2,7 @@
 (function () {
     var module = angular.module('app');
 
-    function controller($http, $modal) {
+    function controller($http, $modal, toastr) {
         var $ctrl = this;
 
         $ctrl.$onInit = function () {
@@ -32,6 +32,7 @@
                 console.log('roles', roles);
                 console.log('result', user);
                 $ctrl.users.unshift(user);
+                toastr.success('Created User');
             }, function (reason) {
             });
         }
@@ -43,8 +44,8 @@
                 resolve: { user: angular.copy(item) },
                 size: 'md'
             }).result.then(function (result) {
-                    console.log('result', result);
                 angular.extend(item, result);
+                toastr.success('Updated User');
             },
                 function (reason) { });
         }
@@ -53,6 +54,7 @@
             $http.delete('api/user/' + c.id).then(function (r) {
                 var idx = $ctrl.users.indexOf(c);
                 $ctrl.users.splice(idx, 1);
+                toastr.warning('Deleted User');
             });
         }
 
@@ -61,7 +63,7 @@
     module.component('userList',
         {
             templateUrl: 'app/users/user-list.component.html',
-            controller: ['$http', '$uibModal', controller]
+            controller: ['$http', '$uibModal', 'toastr', controller]
         });
 
 }
