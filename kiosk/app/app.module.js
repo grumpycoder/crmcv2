@@ -33,25 +33,19 @@
             kiosk: 1
         });
 
-    //module.config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
-    //    usSpinnerConfigProvider.setDefaults(
-    //    {
-    //        color: 'blue',
-    //        radius: 30,
-    //        width: 8,
-    //        length: 16
-    //    });
-    //}]);
-
     module.run(['config', function (config) {
         switch (config.host) {
             case 'crmckiosk':
                 config.apiUrl = 'http://crmc/api/visitor';
                 config.hubUrl = 'http://crmc/signalr';
                 break;
-            case 'crmckiosk-test':
+            case 'crmckiosk-test.splcenter.org':
                 config.apiUrl = 'http://crmc-test/api/visitor';
                 config.hubUrl = 'http://crmc-test/signalr';
+                break;
+            case 'crmckiosk.splcenter.org':
+                config.apiUrl = 'http://crmc/api/visitor';
+                config.hubUrl = 'http://crmc/signalr';
                 break;
             default:
 
