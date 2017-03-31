@@ -7,10 +7,17 @@
 
         $ctrl.$onInit = function () {
             console.log('dashboard init');
+            $ctrl.refresh();
+        }
+
+        $ctrl.refresh = function () {
+            $ctrl.loading = true;
             $http.get('api/visitor/summary').then(function (r) {
                 $ctrl.summary = r.data;
             }).catch(function (err) {
                 console.error('something went wrong', err);
+            }).finally(function (e) {
+                $ctrl.loading = false;
             });
         }
     }

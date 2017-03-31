@@ -59,6 +59,7 @@
         }
 
         $ctrl.search = function (tableState) {
+            $ctrl.loading = true; 
             tableStateRef = tableState;
             $ctrl.searchModel.fuzzyMatchRange = $ctrl.fuzzyMatchRange; 
             $ctrl.searchModel.daysOld = $ctrl.days;
@@ -72,6 +73,8 @@
                 $ctrl.visitors = r.data.results;
                 $ctrl.searchModel = r.data;
                 delete $ctrl.searchModel.results;
+            }).finally(function() {
+                $ctrl.loading = false; 
             });
         }
 

@@ -6,6 +6,8 @@
         'ui.slider',
         'smart-table',
         'ngTagsInput',
+        'ngAnimate', 
+        'treasure-overlay-spinner',
         'toastr'
     ]);
 

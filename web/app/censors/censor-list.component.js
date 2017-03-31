@@ -58,6 +58,7 @@
         }
 
         $ctrl.search = function (tableState) {
+            $ctrl.loading = true; 
             tableStateRef = tableState;
             if (typeof (tableState.sort.predicate) !== "undefined") {
                 $ctrl.searchModel.orderBy = tableState.sort.predicate;
@@ -67,6 +68,8 @@
                 $ctrl.censors = r.data.results;
                 $ctrl.searchModel = r.data;
                 delete $ctrl.searchModel.results;
+            }).finally(function() {
+                $ctrl.loading = false; 
             });
         }
 

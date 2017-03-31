@@ -23,41 +23,42 @@
             <i class="glyphicon glyphicon-plus"></i> New
         </button>
     </span>
-
-    <table class="table table-bordered table-responsive table-hover">
-        <thead>
-        <tr>
-            <th st-sort="word">Word</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td><input type="text" ng-model="$ctrl.searchModel.word" class="form-control" placeholder="Word"/></td>
-            <td></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="c in $ctrl.censors">
-            <td>{{c.word}}</td>
-            <td class="text-nowrap">
-                <a ng-click="$ctrl.edit(c)">Edit</a> |
-                <a ng-click="$ctrl.delete(c)">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="2">
-                <span uib-pagination total-items="$ctrl.searchModel.filteredCount"
-                      ng-model="$ctrl.searchModel.page"
-                      max-size="5"
-                      items-per-page="$ctrl.searchModel.pageSize"
-                      class="pagination-sm"
-                      boundary-link-numbers="true"
-                      ng-change="$ctrl.paged()"
-                      rotate="false">
-                </span>
-            </td>
-        </tr>
-        </tfoot>
-    </table>
+    <treasure-overlay-spinner active='$ctrl.loading'>
+        <table class="table table-bordered table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th st-sort="word">Word</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td><input type="text" ng-model="$ctrl.searchModel.word" class="form-control" placeholder="Word" /></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in $ctrl.censors">
+                    <td>{{c.word}}</td>
+                    <td class="text-nowrap">
+                        <a ng-click="$ctrl.edit(c)">Edit</a> |
+                        <a ng-click="$ctrl.delete(c)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <span uib-pagination total-items="$ctrl.searchModel.filteredCount"
+                              ng-model="$ctrl.searchModel.page"
+                              max-size="5"
+                              items-per-page="$ctrl.searchModel.pageSize"
+                              class="pagination-sm"
+                              boundary-link-numbers="true"
+                              ng-change="$ctrl.paged()"
+                              rotate="false">
+                        </span>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </treasure-overlay-spinner>
 </div>

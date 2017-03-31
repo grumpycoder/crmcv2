@@ -26,7 +26,9 @@
     "font-awesome-bower": "~4.5.0",
     "angular-slider": "^0.3.2",
     "ng-tags-input": "3.1.1",
-    "angular-toastr": "^2.1.1"
+    "angular-toastr": "^2.1.1",
+    "angular-treasure-overlay-spinner": "^1.1.0",
+    "angular-animate": "^1.6.4"
   },
   "overrides": {
     "bootswatch-dist": {
