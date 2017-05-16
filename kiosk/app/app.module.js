@@ -6,6 +6,7 @@
         'ui.bootstrap',
         'ngMessages',
         'onScreenKeyboard', 
+        'utils.autofocus', 
         'treasure-overlay-spinner'
     ]);
 

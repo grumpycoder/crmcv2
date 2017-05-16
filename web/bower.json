@@ -48,5 +48,8 @@
         "dist/slider.css"
       ]
     }
+  },
+  "resolutions": {
+    "angular": "1.6.4"
   }
 }
