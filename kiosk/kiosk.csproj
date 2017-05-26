@@ -151,6 +151,7 @@
     <Content Include="app\app.module.js" />
     <Content Include="app\directives\angular-on-screen-keyboard.html" />
     <Content Include="app\directives\angular-on-screen-keyboard.js" />
+    <Content Include="app\directives\blacklist.directive.js" />
     <Content Include="app\directives\util.autofocus.js" />
     <Content Include="app\results.component.js" />
     <Content Include="app\search.component.html" />

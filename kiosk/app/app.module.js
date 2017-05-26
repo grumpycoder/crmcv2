@@ -2,11 +2,11 @@
 (function () {
     var module = angular.module('app', [
         'ngComponentRouter',
-        'ngAnimate', 
+        'ngAnimate',
         'ui.bootstrap',
         'ngMessages',
-        'onScreenKeyboard', 
-        'utils.autofocus', 
+        'onScreenKeyboard',
+        'utils.autofocus',
         'treasure-overlay-spinner'
     ]);
 
@@ -27,6 +27,7 @@
     module.value('config',
         {
             host: window.location.hostname,
+            apiUrlBase: 'http://localhost:49960/api/',
             apiUrl: 'http://localhost:49960/api/visitor',
             hubUrl: 'http://localhost:49960/signalr',
             redirectTimeout: 30000,
@@ -34,25 +35,28 @@
             kiosk: 1
         });
 
-    module.run(['config', function (config) {
+    module.run(['config', 'censorService', '$http', function (config, censor, $http) {
         switch (config.host) {
             case 'crmckiosk':
-                config.apiUrl = 'http://crmc/api/visitor';
+                config.apiUrlBase = 'http://crmc/api/',
+                    config.apiUrl = 'http://crmc/api/visitor';
                 config.hubUrl = 'http://crmc/signalr';
                 break;
             case 'crmckiosk-test.splcenter.org':
-                config.apiUrl = 'http://crmc-test/api/visitor';
+                config.apiUrlBase = 'http://crmc-test/api/',
+                    config.apiUrl = 'http://crmc-test/api/visitor';
                 config.hubUrl = 'http://crmc-test/signalr';
                 break;
             case 'crmckiosk.splcenter.org':
-                config.apiUrl = 'http://crmc/api/visitor';
+                config.apiUrlBase = 'http://crmc/api/',
+                    config.apiUrl = 'http://crmc/api/visitor';
                 config.hubUrl = 'http://crmc/signalr';
                 break;
             default:
 
         }
+        
     }]);
-
 
 }
 )();

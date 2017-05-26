@@ -3,7 +3,7 @@
     var module = angular.module('app');
 
     function controller() {
-        var $ctrl = this; 
+        var $ctrl = this;
 
         $ctrl.$onInit = function () {
             console.log('welcome init');
@@ -11,7 +11,7 @@
 
         this.$routerOnActivate = function (next) { };
 
-        $ctrl.gotoRegister = function() {
+        $ctrl.gotoRegister = function () {
             this.$router.navigate(['Register']);
         }
 
@@ -23,7 +23,7 @@
     module.component('welcome',
         {
             bindings: { $router: '<' },
-            templateUrl: 'app/welcome.component.html', 
+            templateUrl: 'app/welcome.component.html',
             controller: [controller]
         });
 
