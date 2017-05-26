@@ -7,7 +7,8 @@
         'ngMessages',
         'onScreenKeyboard',
         'utils.autofocus',
-        'treasure-overlay-spinner'
+        'treasure-overlay-spinner',
+        'LocalStorageModule'
     ]);
 
     module.component('kiosk',
@@ -19,9 +20,12 @@
                 { path: '/pledge', name: 'Pledge', component: 'pledge' },
                 { path: '/finish', name: 'Finish', component: 'finish' },
                 { path: '/search', name: 'Search', component: 'search' },
-                { path: '/results', name: 'Results', component: 'results' }
+                { path: '/results', name: 'Results', component: 'results' },
+                { path: '/settings', name: 'Settings', component: 'settings' }
             ]
         });
+
+
 
     module.value('$routerRootComponent', 'kiosk');
     module.value('config',
@@ -34,8 +38,8 @@
             finishTimeout: 4,
             kiosk: 1
         });
-
-    module.run(['config', 'censorService', '$http', function (config, censor, $http) {
+    
+    module.run(['config', function (config) {
         switch (config.host) {
             case 'crmckiosk':
                 config.apiUrlBase = 'http://crmc/api/',
@@ -55,7 +59,7 @@
             default:
 
         }
-        
+
     }]);
 
 }

@@ -162,8 +162,11 @@
     <Content Include="app\register.component.html" />
     <Content Include="app\register.component.js" />
     <Content Include="app\search.component.js" />
+    <Content Include="app\services\censor.service.js" />
     <Content Include="app\services\visitor.service.js" />
     <Content Include="app\results.component.html" />
+    <Content Include="app\settings.component.html" />
+    <Content Include="app\settings.component.js" />
     <Content Include="app\welcome.component.html" />
     <Content Include="app\welcome.component.js" />
     <Content Include="css\keyboard.css" />
