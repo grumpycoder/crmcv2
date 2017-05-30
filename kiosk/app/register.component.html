@@ -13,11 +13,13 @@
 
                     <div class="col-md-12">
                         <input type="text" class="form-control" id="firstname" name="firstname" autofocus
+                               ng-model-options="{ debounce: 100 }"
                                ng-change="$ctrl.startTimer()"
                                ng-model="$ctrl.visitor.firstname" required="" placeholder="First Name"
                                ng-required="true"
                                ng-pattern="/^[a-zA-Z, `-]*$/"
-                               ng-maxlength="50" />
+                               ng-maxlength="50"
+                                />
 
                         <span class="errorMessage arrow_box text-danger" ng-show="vm.showValidationErrors && $ctrl.form.firstname.$error.required">Required</span>
                         <div ng-messages="$ctrl.form.firstname.$error" ng-show="$ctrl.form.firstname.$invalid && ($ctrl.form.firstname.$touched)">
@@ -34,12 +36,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <input type="text" class="form-control" id="lastname" name="lastname" 
+                               ng-model-options="{ debounce: 100 }"
                                ng-change="$ctrl.startTimer()"
                                ng-model="$ctrl.visitor.lastname" placeholder="Last Name"
                                required
                                ng-pattern="/^[a-zA-Z, `-]*$/"
-                               ng-maxlength="50" />
-
+                               ng-maxlength="50" 
+                                />
                         <span class="errorMessage arrow_box text-danger" ng-show="vm.showValidationErrors && $ctrl.form.lastname.$error.required">Required</span>
                         <div ng-messages="$ctrl.form.lastname.$error" ng-show="$ctrl.form.lastname.$invalid && ($ctrl.form.lastname.$touched)">
                             <span class="errorMessage arrow_box text-danger" ng-message="required">Required</span>

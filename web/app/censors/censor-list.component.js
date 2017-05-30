@@ -64,9 +64,11 @@
                 $ctrl.searchModel.orderBy = tableState.sort.predicate;
                 $ctrl.searchModel.orderDirection = tableState.sort.reverse ? 'desc' : 'asc';
             }
-            $http.get('api/censor', { params: $ctrl.searchModel }).then(function (r) {
+            $http.get('api/censor/search', { params: $ctrl.searchModel }).then(function (r) {
+                console.log('r', r.data);
                 $ctrl.censors = r.data.results;
                 $ctrl.searchModel = r.data;
+                console.log($ctrl.censors);
                 delete $ctrl.searchModel.results;
             }).finally(function() {
                 $ctrl.loading = false; 

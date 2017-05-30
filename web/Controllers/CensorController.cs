@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Web.Http;
@@ -18,24 +17,31 @@ namespace web.Controllers
         private readonly DataContext _context = DataContext.Create();
         private const int PAGE_SIZE = 20;
 
-        public object Get([FromUri]CensorSearchModel pager = null)
+        public async Task<object> Get()
+        {
+            var list = await _context.Censors.ToListAsync();
+            return Ok(list);
+        }
+
+        [HttpGet, Route("api/censor/search")]
+        public async Task<object> Search([FromUri]CensorSearchModel pager)
         {
             if (pager == null) pager = new CensorSearchModel();
 
             var query = _context.Censors;
-            var totalCount = query.Count();
+            var totalCount = await query.CountAsync();
 
             var pred = PredicateBuilder.True<Censor>();
             if (!string.IsNullOrWhiteSpace(pager.Word)) pred = pred.And(p => p.Word.Contains(pager.Word));
 
             var filteredQuery = query.Where(pred);
-            var pagerCount = filteredQuery.Count();
+            var pagerCount = await filteredQuery.CountAsync();
 
-            var results = filteredQuery
+            var results = await filteredQuery
                 .Order(pager.OrderBy, pager.OrderDirection == "desc" ? SortDirection.Descending : SortDirection.Ascending)
                 .Skip(pager.PageSize * (pager.Page - 1) ?? 0)
                 .Take(pager.PageSize ?? PAGE_SIZE)
-                .ToList();
+                .ToListAsync();
 
             var totalPages = Math.Ceiling((double)pagerCount / pager.PageSize ?? PAGE_SIZE);
 
@@ -48,6 +54,7 @@ namespace web.Controllers
 
         }
 
+        [HttpGet, Route("{id:int}")]
         public object Get(int id)
         {
             using (var context = DataContext.Create())

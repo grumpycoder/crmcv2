@@ -219,6 +219,16 @@ table tbody > tr > td {
     font-size: 20px;
 }
 
+.secret {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    width: 100px;
+}
+
 pre {
     display: none;
 }
