@@ -1,8 +1,4 @@
-﻿using AsyncBridge;
-using AutoMapper;
-using CRMC.Domain;
-using Microsoft.AspNet.SignalR.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -12,6 +8,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using AsyncBridge;
+using AutoMapper;
+using CRMC.Domain;
+using Microsoft.AspNet.SignalR.Client;
 using wot.Extensions;
 using wot.Services;
 using wot.ViewModels;
@@ -108,7 +108,7 @@ namespace wot
                             Debug.WriteLine($"Displaying {person} for {person.CurrentDisplayCount} in lane {lane.LaneIndex}");
                             await Animate(person, lane);
                             //TODO: Refactor out RecycleCount
-                            if (person.CurrentDisplayCount > Configuration.KioskDisplayRecycleCount) lane.People.Remove(person);
+                            if (person.CurrentDisplayCount >= Configuration.KioskDisplayRecycleCount) lane.People.Remove(person);
                         }
                         continue;
                     }

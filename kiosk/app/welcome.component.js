@@ -2,12 +2,14 @@
 (function () {
     var module = angular.module('app');
 
-    function controller() {
+    function controller(visitor) {
         var $ctrl = this;
         var keyCode = ''; 
 
         $ctrl.$onInit = function () {
             console.log('welcome init');
+            visitor.clearTerm();
+            visitor.clear();
         }
 
         this.$routerOnActivate = function (next) { };
@@ -37,7 +39,7 @@
         {
             bindings: { $router: '<' },
             templateUrl: 'app/welcome.component.html',
-            controller: [controller]
+            controller: ['visitorService', controller]
         });
 
 }

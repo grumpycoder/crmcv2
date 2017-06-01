@@ -4,6 +4,7 @@
     //TODO: GET hub url from settings
     function controller($timeout, config, visitor) {
         var $ctrl = this;
+        var term; 
         var timer; 
 
         $ctrl.$onInit = function () {
@@ -12,17 +13,22 @@
             $ctrl.startTimer();
         }
 
-        this.$routerOnActivate = function (next) { };
+        this.$routerOnActivate = function(next, previous) {
+            
+        };
 
         $ctrl.gotoWelcome = function () {
-            visitor.clear();
             $timeout.cancel(timer);
             this.$router.navigate(['Welcome']);
         }
 
         $ctrl.gotoRegister = function () {
             $timeout.cancel(timer);
-            this.$router.navigate(['Register']);
+            if (visitor.getTerm().length > 0) {
+                this.$router.navigate(['Results']);
+            } else {
+                this.$router.navigate(['Register']);
+            }
         }
 
         $ctrl.pledge = function () {
@@ -39,7 +45,6 @@
         $ctrl.startTimer = function () {
             $timeout.cancel(timer);
             timer = $timeout(function () {
-                visitor.clear();
                 $ctrl.$router.navigate(['Welcome']);
             }, config.redirectTimeout);
         }

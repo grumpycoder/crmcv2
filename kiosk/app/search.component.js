@@ -13,7 +13,6 @@
         }
 
         $ctrl.gotoWelcome = function () {
-            visitor.clear();
             $timeout.cancel(timer);
             this.$router.navigate(['Welcome']);
         }
@@ -27,7 +26,6 @@
         $ctrl.startTimer = function () {
             $timeout.cancel(timer);
             timer = $timeout(function () {
-                visitor.clear();
                 $ctrl.$router.navigate(['Welcome']);
             }, config.redirectTimeout);
         }

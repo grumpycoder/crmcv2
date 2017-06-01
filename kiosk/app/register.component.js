@@ -9,7 +9,6 @@
         $ctrl.$onInit = function () {
             $ctrl.visitor = visitor.get();
             $http.get(config.apiUrlBase + 'censor').then(function (r) {
-                console.log('getting data from uri');
                 return $http.get(config.apiUrlBase + 'censor').then(function (r) {
                     var list = [];
                     if (r.data.length > 0) {
@@ -42,7 +41,6 @@
         $ctrl.startTimer = function () {
             $timeout.cancel(timer);
             timer = $timeout(function () {
-                visitor.clear();
                 $ctrl.$router.navigate(['Welcome']);
             }, config.redirectTimeout);
         }

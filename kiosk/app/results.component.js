@@ -1,7 +1,7 @@
 ﻿//results.component.js
 (function () {
     var module = angular.module('app');
-    //TODO: GET hub url from settings
+
     function controller(config, $timeout, visitor) {
         var $ctrl = this;
         var timer; 
@@ -41,7 +41,6 @@
         }
 
         $ctrl.pledge = function () {
-            visitor.clearTerm();
             $timeout.cancel(timer);
             this.$router.navigate(['Pledge']);
         }
@@ -72,7 +71,6 @@
         $ctrl.startTimer = function () {
             $timeout.cancel(timer);
             timer = $timeout(function () {
-                visitor.clear();
                 $ctrl.$router.navigate(['Welcome']);
             }, config.redirectTimeout);
         }

@@ -1,21 +1,16 @@
 ﻿//finish.component.js
 (function () {
     var module = angular.module('app');
-    //TODO: SET/GET kiosk number from local storage
     function controller(config, visitor, $timeout, localStorage) {
         var $ctrl = this;
+        var hub;
 
         $ctrl.$onInit = function () {
             console.log('finish init', config);
             $ctrl.kiosk = localStorage.get('kiosk') || 1;
 
             $.connection.hub.url = config.hubUrl;
-            var hub = $.connection.nameNotificationHub;
-            $.connection.hub.start().done(function() {
-                console.log('hub connection started');
-                hub.server.addName($ctrl.kiosk, visitor.get());
-            });
-
+            hub = $.connection.nameNotificationHub;
             $ctrl.countDown_tick = config.finishTimeout;
             $ctrl.startTimer();
         }
@@ -26,8 +21,11 @@
 
         $ctrl.startTimer = function () {
             if ($ctrl.countDown_tick <= 0) {
-                visitor.clear();
                 console.log('timer finished');
+                $.connection.hub.start().done(function () {
+                    console.log('hub connection started');
+                    hub.server.addName($ctrl.kiosk, visitor.get());
+                });
                 $ctrl.$router.navigate(['Welcome']);
             } else {
                 $ctrl.countDown_tick--;

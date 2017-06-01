@@ -14,13 +14,13 @@
                 <div class="grid">
                     <table class="table table-condensed table-responsive ng-table-rowselected">
                         <tbody>
-                        <tr ng-repeat="visitor in $ctrl.visitors" ng-click="$ctrl.toggleName(visitor)" ng-multiple="false" ng-class="{'selected': $ctrl.visitor === visitor }">
-                            <td style="text-align: left;">{{visitor.firstname}} {{visitor.lastname}}</td>
-                            <td style="text-align: right">{{visitor.zipcode}}</td>
-                        </tr>
-                        <tr ng-show="$ctrl.visitors.length == 0">
-                            <td colspan="2">No results found</td>
-                        </tr>
+                            <tr ng-repeat="visitor in $ctrl.visitors" ng-click="$ctrl.toggleName(visitor)" ng-multiple="false" ng-class="{'selected': $ctrl.visitor === visitor }">
+                                <td style="text-align: left;">{{visitor.firstname}} {{visitor.lastname}}</td>
+                                <td style="text-align: right">{{visitor.zipcode}}</td>
+                            </tr>
+                            <tr ng-show="$ctrl.visitors.length == 0">
+                                <td colspan="2">No results found</td>
+                            </tr>
                         </tbody>
                         <tfoot>
                             <tr>
@@ -52,31 +52,32 @@
         </div>
     </div>
 
-</div>
 
 
-<div class="row">
-    <div class="btn-row" style="margin-top: 50px;">
 
-        <div class="pull-left">
-            <button class="btn btn-danger btn-lg" ng-click="$ctrl.gotoSearch()">
-                <i class="fa fa-angle-left"></i> GO BACK
-            </button>
+    <div class="row">
+        <div class="btn-row" style="margin-top: 50px;">
+
+            <div class="pull-left">
+                <button class="btn btn-danger btn-lg" ng-click="$ctrl.gotoSearch()">
+                    <i class="fa fa-angle-left"></i> GO BACK
+                </button>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-danger btn-lg"
+                        ng-click="$ctrl.pledge()" ng-disabled="!$ctrl.visitor">
+                    CONTINUE <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-danger btn-lg"
+                        ng-click="$ctrl.gotoWelcome()">
+                    HOME
+                </button>
+            </div>
+            <!--</div>-->
         </div>
-        <div class="pull-right">
-            <button class="btn btn-danger btn-lg"
-                    ng-click="$ctrl.pledge()" ng-disabled="!$ctrl.visitor">
-                CONTINUE <i class="fa fa-angle-right"></i>
-            </button>
-        </div>
-
-        <div class="text-center">
-            <button class="btn btn-danger btn-lg"
-                    ng-click="$ctrl.gotoWelcome()">
-                HOME
-            </button>
-        </div>
-        <!--</div>-->
     </div>
-</div>
+
 </div>
