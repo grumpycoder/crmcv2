@@ -8,5 +8,11 @@
     <Setting Name="AudioFilePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">c:\audio</Value>
     </Setting>
+    <Setting Name="NumberOfLanes" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="DebugMode" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

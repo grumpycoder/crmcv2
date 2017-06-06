@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using wot.Services;
 
@@ -35,14 +32,14 @@ namespace wot.ViewModels
 
         public async Task LoadNamesAsync(int currentCount, int defaultTakeCount, string webServerUrl)
         {
-            Console.WriteLine($"Loading new names {currentCount}");
+            //Console.WriteLine($"Loading new names {currentCount}");
             var service = new NameService(webServerUrl);
             People = await service.GetDistinct(currentCount, defaultTakeCount, false);
         }
 
         public async Task<List<PersonViewModel>> UpdateQueueAsync(int currentCount, int defaultTakeCount, string webServerUrl)
         {
-            Console.WriteLine($"Loading secondary new names {currentCount}");
+            //Console.WriteLine($"Loading secondary new names {currentCount}");
             var service = new NameService(webServerUrl);
             Queue = await service.GetDistinct(currentCount, defaultTakeCount, false);
             return Queue;

@@ -1,10 +1,10 @@
-using CRMC.Domain;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using CRMC.Domain;
 using wot.Extensions;
 
 namespace wot.ViewModels
@@ -23,6 +23,7 @@ namespace wot.ViewModels
         public double TotalTime { get; set; }
         private double _currentTime;
         private readonly Configuration _configuration;
+        private bool _debugMode;
 
         //TODO: Colors from data store
         private readonly List<Color> _fontColors = new List<Color>
@@ -34,10 +35,12 @@ namespace wot.ViewModels
             Color.FromRgb(246, 227, 213)
         };
 
+
         //TODO: Refactor out Configuration
-        public DisplayElement(PersonViewModel person, IDisplayLane lane, double canvasWidth, Configuration configuration)
+        public DisplayElement(PersonViewModel person, IDisplayLane lane, double canvasWidth, Configuration configuration, bool debugMode)
         {
             _configuration = configuration;
+            _debugMode = debugMode;
             Person = person;
             Lane = lane;
             TotalCanvasWidth = canvasWidth;
@@ -59,6 +62,11 @@ namespace wot.ViewModels
                 Width = width,
                 HorizontalAlignment = HorizontalAlignment.Center
             };
+            if (!_debugMode) return border;
+
+            border.BorderBrush = Brushes.Red;
+            border.BorderThickness = new Thickness(2);
+
             return border;
         }
 
@@ -103,8 +111,15 @@ namespace wot.ViewModels
 
         public void GetXAxis()
         {
-            var position = RandomNumber(Lane.LeftMargin.ToInt(), (Lane.RightMargin - Label.ActualWidth).ToInt());
-            XAxis = position;
+            if (Lane.GetType() == typeof(KioskDisplayLane) && Person.IsFirstRun)
+            {
+                XAxis = Lane.LeftMargin;
+            }
+            else
+            {
+                var position = RandomNumber(Lane.LeftMargin.ToInt(), (Lane.RightMargin - Label.ActualWidth).ToInt());
+                XAxis = position;
+            }
         }
 
         public void GetYAxis()

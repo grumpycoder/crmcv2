@@ -7,7 +7,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using AsyncBridge;
 using AutoMapper;
 using CRMC.Domain;
@@ -28,11 +30,15 @@ namespace wot
 
         private static readonly string WebServerUrl = Properties.Settings.Default.WebserverUri;
 
+
         private int _currentCount;
         private Canvas _canvas;
         public Configuration Configuration;
         public AudioManager AudioManager;
         private static readonly string AudioFilePath = @Properties.Settings.Default.AudioFilePath;
+        private static readonly int _numberOfLanes = @Properties.Settings.Default.NumberOfLanes;
+        private static readonly bool _debugMode = @Properties.Settings.Default.DebugMode;
+
         public List<IDisplayLane> Lanes = new List<IDisplayLane>();
         public CancellationToken CancelToken = new CancellationToken();
         public CancellationTokenSource Canceller = new CancellationTokenSource();
@@ -50,6 +56,7 @@ namespace wot
             await InitDisplay();
             await InitAudioSettings();
             await InitConnectionManager();
+            if (_debugMode) AddLines();
 
             AsyncHelper.FireAndForget(BeginRotaion);
         }
@@ -67,10 +74,10 @@ namespace wot
             var width = _canvas.ActualWidth;
 
             //Kiosk Lanes
-            for (var i = 1; i <= 4; i++)
+            for (var i = 1; i < _numberOfLanes + 1; i++)
             {
                 //TODO: Refactor out width
-                Lanes.Add(new KioskDisplayLane(laneIndex: i, canvasWidth: width, totalLanes: 4));
+                Lanes.Add(new KioskDisplayLane(laneIndex: i, canvasWidth: width, totalLanes: _numberOfLanes));
             }
 
             //General Lane
@@ -94,6 +101,31 @@ namespace wot
             }
         }
 
+        private void AddLines()
+        {
+            var c = WallCanvas;
+            for (var i = 1; i <= _numberOfLanes; i++)
+            {
+                var LaneWidth = c.ActualWidth / _numberOfLanes;
+                var LeftMargin = LaneWidth * (i - 1);
+                var RightMargin = LeftMargin + LaneWidth;
+                //TODO: Refactor out width
+                //Lanes.Add(new KioskDisplayLane(laneIndex: i, canvasWidth: width, totalLanes: 4));
+                var h = _canvas.ActualHeight;
+                var line = new Line
+                {
+                    Stroke = Brushes.Red,
+                    X1 = RightMargin,
+                    X2 = RightMargin,
+                    Y1 = 0,
+                    Y2 = h,
+                    StrokeThickness = 2
+                };
+                c.Children.Add(line);
+
+            }
+        }
+
         private async Task DisplayScreenModelAsync(IDisplayLane lane)
         {
             while (true)
@@ -104,9 +136,9 @@ namespace wot
                     {
                         if ((DateTime.Now >= person.NextDisplayTime))
                         {
-                            person.CurrentDisplayCount += 1;
                             Debug.WriteLine($"Displaying {person} for {person.CurrentDisplayCount} in lane {lane.LaneIndex}");
                             await Animate(person, lane);
+                            person.CurrentDisplayCount += 1;
                             //TODO: Refactor out RecycleCount
                             if (person.CurrentDisplayCount >= Configuration.KioskDisplayRecycleCount) lane.People.Remove(person);
                         }
@@ -153,7 +185,7 @@ namespace wot
                 NameScope.SetNameScope(this, new NameScope());
                 var storyboard = new Storyboard();
 
-                var displayElement = new DisplayElement(person, lane, width, Configuration);
+                var displayElement = new DisplayElement(person, lane, width, Configuration, _debugMode);
                 List<MyAnimation> animations = displayElement.CreateAnimations();
                 RegisterName(displayElement.Label.Name, displayElement.Label);
                 RegisterName(displayElement.Border.Name, displayElement.Border);
@@ -188,9 +220,6 @@ namespace wot
             if (lane == null) return;
 
             var pvm = Mapper.Map<Person, PersonViewModel>(person);
-
-            var waitUntil = await Animate(pvm, lane);
-            pvm.NextDisplayTime = DateTime.Now.AddSeconds(waitUntil);
             lane.People.Add(pvm);
         }
 
