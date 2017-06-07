@@ -54,7 +54,6 @@
                     <a href="#" ng-click="$ctrl.refresh()"><i class="fa fa-refresh"></i></a>
                 </span>
             </h3>
-
             <treasure-overlay-spinner active='$ctrl.loading'>
                 <table class="table table-condensed table-striped table-responsive">
                     <thead>
@@ -66,7 +65,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="visitor in $ctrl.summary.visitors">
+                        <tr ng-repeat="visitor in $ctrl.visitors">
                             <td>{{ visitor.firstname }} {{ visitor.lastname }}</td>
                             <td>{{ visitor.zipcode }}</td>
                             <td>{{ visitor.dateCreated | date:"MM/dd/yyyy" }}</td>
