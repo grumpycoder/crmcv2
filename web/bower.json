@@ -28,7 +28,9 @@
     "ng-tags-input": "3.1.1",
     "angular-toastr": "^2.1.1",
     "angular-treasure-overlay-spinner": "^1.1.0",
-    "angular-animate": "^1.6.4"
+    "angular-animate": "^1.6.4",
+    "ng-file-upload": "^12.0.4",
+    "ngFileReader": "^0.0.8"
   },
   "overrides": {
     "bootswatch-dist": {

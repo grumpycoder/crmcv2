@@ -1,9 +1,4 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using CRMC.DataAccess;
-using CRMC.Domain;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.Web.Mvc;
 
 namespace web.Controllers
 {
@@ -34,6 +29,11 @@ namespace web.Controllers
         }
 
         public ActionResult Users()
+        {
+            return View();
+        }
+
+        public ActionResult Upload()
         {
             return View();
         }

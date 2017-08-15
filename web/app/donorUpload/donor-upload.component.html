@@ -1,0 +1,87 @@
+﻿
+<h2>Donor Upload</h2>
+
+<div class="row">
+
+    <div class="col-md-12" ng-hide="$ctrl.showCreate">
+
+        <div class="form-group">
+
+            <div ngf-drop ng-model="$ctrl.file" class="drop-box" name="file"
+                 ngf-select
+                 ngf-drag-over-class="'dragover'" ngf-multiple="false" ngf-allow-dir="false"
+                 ngf-change="$ctrl.fileSelected($ctrl.file, $event)">Drop CSV here or click to upload</div>
+
+            <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+
+        </div>
+        
+        <div class="form-group">
+            <div ng-hide="$ctrl.file" >
+                <span>{{$ctrl.result.message}}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div ng-show="$ctrl.file">
+                <dl class="dl-horizontal">
+                    <dt>Filename</dt>
+                    <dd>{{$ctrl.file.name}}</dd>
+                    <dt>Size</dt>
+                    <dd>{{$ctrl.file.size}}</dd>
+                    <dt>Last Modified</dt>
+                    <dd>{{$ctrl.file.lastModifiedDate | date: 'MM/dd/yyyy HH:mm'}}</dd>
+                </dl>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" ng-click="$ctrl.upload()" ng-disabled="$ctrl.isBusy || !$ctrl.file || form.$pristine">
+            Load File
+        </button>
+        
+        <button class="btn btn-primary pull-right"
+                ng-click="$ctrl.isNotesOpen = !$ctrl.isNotesOpen"
+                uib-popover="Click here for additional information"
+                popover-trigger="mouseenter"
+                popover-placement="right">
+            Additional Notes
+        </button>
+
+
+    </div>
+    
+    <div class="col-md-12">
+   
+        <div uib-collapse="!$ctrl.isNotesOpen">
+            <div class="well in">
+                <h4>Helpful tips:</h4>
+                <ul>
+                    <li>Choose your donor names data file to upload.</li>
+                    <li>Click the <kbd>Load File</kbd> button to begin processing the file. Depending on the number of records could take some time.</li>
+                </ul>
+
+                <h4>File Formatting:</h4>
+                <p>
+                File must have header in the following format:<br/>
+                <p>
+                    <code>
+                        [LookupId], [Name], [ZipCode]
+                    </code>
+                </p>
+                <p>
+                    Header field names are case sensitive and must be in the exact case or word spacing specified and
+                    have at minimum the fields indicated. Any additional fields will be ignored.
+                </p>
+                <p>
+                    If you receive error regarding column mappings, make sure you update the file header format to match.
+                </p>
+
+            </div>
+        </div>
+   
+    </div>
+
+
+</div>
+
+

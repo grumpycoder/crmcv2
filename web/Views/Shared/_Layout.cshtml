@@ -40,6 +40,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="@Url.Action("Upload", "Home")">
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                            Donor Upload
+                        </a>
+                    </li>
+                    <li>
                         <a href="@Url.Action("Users", "Home")">
                             <i class="fa fa-cogs" aria-hidden="true"></i>
                             Users
@@ -56,7 +62,10 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - CRMC Administration</p>
+            <div class="pull-right hidden-xs">
+                <b>Version</b> @typeof(web.MvcApplication).Assembly.GetName().Version
+            </div>
+            <strong>Copyright &copy; @DateTime.Now.Year - CRMC Administration</strong>
         </footer>
     </div>
 

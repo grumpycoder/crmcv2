@@ -6,6 +6,8 @@
         'ui.slider',
         'smart-table',
         'ngTagsInput',
+        'ngFileUpload',
+        'ngFileReader',
         'ngAnimate', 
         'treasure-overlay-spinner',
         'toastr'
