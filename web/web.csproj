@@ -30,7 +30,7 @@
     <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
     <AssemblyVersionSettings>
     </AssemblyVersionSettings>
-    <AssemblyVersion>2017.8.14.6436</AssemblyVersion>
+    <AssemblyVersion>2017.8.15.6437</AssemblyVersion>
     <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -269,6 +269,7 @@
     <Content Include="app\visitors\visitor-edit.component.js" />
     <Content Include="app\visitors\visitor-list.component.html" />
     <Content Include="app\visitors\visitor-list.component.js" />
+    <Content Include="App_Data\readme.txt" />
     <Content Include="css\site.css" />
     <Content Include="css\site.min.css" />
     <Content Include="css\vendor.min.css" />
@@ -321,7 +322,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>

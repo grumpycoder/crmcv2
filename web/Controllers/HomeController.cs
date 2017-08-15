@@ -15,24 +15,24 @@ namespace web.Controllers
 
             return View();
         }
-
+        [Authorize]
         public ActionResult Censors()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
-
+        [Authorize]
         public ActionResult Configuration()
         {
             return View();
         }
-
+        [Authorize]
         public ActionResult Users()
         {
             return View();
         }
-
+        [Authorize]
         public ActionResult Upload()
         {
             return View();

@@ -92,6 +92,9 @@ namespace web.Controllers
                     var split = mailer.Firstname.Split(new char[] { ' ' }, 2);
                     mailer.Lastname = split[1];
                     mailer.Firstname = split[0];
+                    mailer.DateCreated = DateTime.Now;
+                    mailer.FuzzyMatchValue = 0;
+                    mailer.IsDonor = true;
                 }
             });
             return list;
